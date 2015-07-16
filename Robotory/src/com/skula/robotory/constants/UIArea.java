@@ -3,14 +3,13 @@ package com.skula.robotory.constants;
 import android.graphics.Rect;
 
 public class UIArea {
-	public static final int TILE_WIDTH = 130;
-	public static final int TILE_HEIGHT = 144;
+	public static final int TILE_WIDTH = 130; //OK
+	public static final int TILE_HEIGHT = 144; //OK
 	public static int BTN_OK_SIZE = 40;
 	public static int BTN_STOCK_SIZE = 40;
 	public static int AREA_STOCK_SIZE = 40;
-	public static final int SPACE = 8;
-	public static final int X_SPACE = 10;
-	public static final int Y_SPACE = 10;
+	public static final int Y_SPACE = 8; //OK
+	public static final int X_SPACE = 10; //OK
 
 	private static final int COL_1_X = 52;
 	private static final int COL_2_X = COL_1_X + X_SPACE + TILE_WIDTH;
@@ -112,7 +111,7 @@ public class UIArea {
 	public static final int AREA_NONE_ID = -1;
 
 	private static Rect createArea(int x, int y, int dy) {
-		return new Rect(x, y + dy * (TILE_HEIGHT + SPACE), x + TILE_WIDTH, y + dy * (TILE_HEIGHT + SPACE) + TILE_HEIGHT);
+		return new Rect(x, y + dy * (TILE_HEIGHT + Y_SPACE), x + TILE_WIDTH, y + dy * (TILE_HEIGHT + Y_SPACE) + TILE_HEIGHT);
 	}
 
 	private static Rect createStock(int x, int y) {
