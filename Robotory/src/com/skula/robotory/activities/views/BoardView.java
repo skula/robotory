@@ -10,14 +10,17 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.skula.robotory.R;
+import com.skula.robotory.services.Drawer;
 
 public class BoardView extends View {
 	private Paint paint;
 	private Resources res;
+	private Drawer drawer;
 
 	public BoardView(Context context) {
 		super(context);
 		this.paint = new Paint();
+		this.drawer = new Drawer(res, null);
 		this.res = context.getResources();
 	}
 
@@ -38,6 +41,8 @@ public class BoardView extends View {
 
 	@Override
 	public void draw(Canvas canvas) {
-		canvas.drawBitmap(BitmapFactory.decodeResource(res, R.drawable.background), new Rect(0, 0, 800, 1280), new Rect(0, 0, 800, 1200), paint);
+		canvas.drawBitmap(BitmapFactory.decodeResource(res, R.drawable.background), new Rect(0, 0, 800, 1280),
+				new Rect(0, 0, 800, 1200), paint);
+		drawer.draw(canvas);
 	}
 }
