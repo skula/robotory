@@ -11,9 +11,9 @@ import com.skula.robotory.constants.UIArea;
 public class Drawer {
 	private PictureLibrary lib;
 	private Paint paint;
-	private GamenEngine engine;
+	private GameEngine engine;
 
-	public Drawer(Resources res, GamenEngine engine) {
+	public Drawer(Resources res, GameEngine engine) {
 		this.engine = engine;
 		this.paint = new Paint();
 		this.lib = new PictureLibrary(res);

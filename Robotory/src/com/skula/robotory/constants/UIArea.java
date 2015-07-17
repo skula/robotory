@@ -314,8 +314,312 @@ public class UIArea {
 
 		return AREA_NONE_ID;
 	}
+	
+	public static String getAreaLabel(int x, int y) {
+		// AREA_TILE_1
+		if (AREA_TILE_1.contains(x, y)) {
+			return "AREA_TILE_1";
+		}
+
+		// AREA_TILE_2
+		if (AREA_TILE_2.contains(x, y)) {
+			return "AREA_TILE_2";
+		}
+
+		// AREA_TILE_3
+		if (AREA_TILE_3.contains(x, y)) {
+			return "AREA_TILE_3";
+		}
+
+		// AREA_TILE_4
+		if (AREA_TILE_4.contains(x, y)) {
+			return "AREA_TILE_4";
+		}
+
+		// AREA_TILE_5
+		if (AREA_TILE_5.contains(x, y)) {
+			return "AREA_TILE_5";
+		}
+
+		// AREA_TILE_6
+		if (AREA_TILE_6.contains(x, y)) {
+			return "AREA_TILE_6";
+		}
+
+		// AREA_TILE_7
+		if (AREA_TILE_7.contains(x, y)) {
+			return "AREA_TILE_7";
+		}
+
+		// AREA_TILE_8
+		if (AREA_TILE_8.contains(x, y)) {
+			return "AREA_TILE_8";
+		}
+
+		// AREA_TILE_9
+		if (AREA_TILE_9.contains(x, y)) {
+			return "AREA_TILE_9";
+		}
+
+		// AREA_TILE_10
+		if (AREA_TILE_10.contains(x, y)) {
+			return "AREA_TILE_10";
+		}
+
+		// AREA_TILE_11
+		if (AREA_TILE_11.contains(x, y)) {
+			return "AREA_TILE_11";
+		}
+
+		// AREA_TILE_12
+		if (AREA_TILE_12.contains(x, y)) {
+			return "AREA_TILE_12";
+		}
+
+		// AREA_TILE_13
+		if (AREA_TILE_13.contains(x, y)) {
+			return "AREA_TILE_13";
+		}
+
+		// AREA_TILE_14
+		if (AREA_TILE_14.contains(x, y)) {
+			return "AREA_TILE_14";
+		}
+
+		// AREA_TILE_15
+		if (AREA_TILE_15.contains(x, y)) {
+			return "AREA_TILE_15";
+		}
+
+		// AREA_TILE_16
+		if (AREA_TILE_16.contains(x, y)) {
+			return "AREA_TILE_16";
+		}
+
+		// AREA_TILE_17
+		if (AREA_TILE_17.contains(x, y)) {
+			return "AREA_TILE_17";
+		}
+
+		// AREA_TILE_18
+		if (AREA_TILE_18.contains(x, y)) {
+			return "AREA_TILE_18";
+		}
+
+		// AREA_TILE_19
+		if (AREA_TILE_19.contains(x, y)) {
+			return "AREA_TILE_19";
+		}
+
+		// AREA_TILE_20
+		if (AREA_TILE_20.contains(x, y)) {
+			return "AREA_TILE_20";
+		}
+
+		// AREA_TILE_21
+		if (AREA_TILE_21.contains(x, y)) {
+			return "AREA_TILE_21";
+		}
+
+		// AREA_TILE_22
+		if (AREA_TILE_22.contains(x, y)) {
+			return "AREA_TILE_22";
+		}
+
+		// AREA_TILE_23
+		if (AREA_TILE_23.contains(x, y)) {
+			return "AREA_TILE_23";
+		}
+
+		// AREA_TILE_24
+		if (AREA_TILE_24.contains(x, y)) {
+			return "AREA_TILE_24";
+		}
+
+		/***************************/
+
+		// AREA_PLAYER1_STOCK_1
+		if (AREA_PLAYER1_STOCK_1.contains(x, y)) {
+			return "AREA_PLAYER1_STOCK_1";
+		}
+
+		// AREA_PLAYER1_STOCK_2
+		if (AREA_PLAYER1_STOCK_2.contains(x, y)) {
+			return "AREA_PLAYER1_STOCK_2";
+		}
+
+		// AREA_PLAYER1_STOCK_3
+		if (AREA_PLAYER1_STOCK_3.contains(x, y)) {
+			return "AREA_PLAYER1_STOCK_3";
+		}
+
+		// AREA_PLAYER1_STOCK_4
+		if (AREA_PLAYER1_STOCK_4.contains(x, y)) {
+			return "AREA_PLAYER1_STOCK_4";
+		}
+		// AREA_PLAYER2_STOCK_1
+		if (AREA_PLAYER2_STOCK_1.contains(x, y)) {
+			return "AREA_PLAYER2_STOCK_1";
+		}
+
+		// AREA_PLAYER2_STOCK_2
+		if (AREA_PLAYER2_STOCK_2.contains(x, y)) {
+			return "AREA_PLAYER2_STOCK_2";
+		}
+
+		// AREA_PLAYER2_STOCK_3
+		if (AREA_PLAYER2_STOCK_3.contains(x, y)) {
+			return "AREA_PLAYER2_STOCK_3";
+		}
+
+		// AREA_PLAYER2_STOCK_4
+		if (AREA_PLAYER2_STOCK_4.contains(x, y)) {
+			return "AREA_PLAYER2_STOCK_4";
+		}
+
+		/***************************/
+
+		// AREA_PLAYER1_BUTTON_OK
+		if (AREA_PLAYER1_BUTTON_OK.contains(x, y)) {
+			return "AREA_PLAYER1_BUTTON_OK";
+		}
+
+		// AREA_PLAYER1_BUTTON_STOCK_WHITE
+		if (AREA_PLAYER1_BUTTON_STOCK_WHITE.contains(x, y)) {
+			return "AREA_PLAYER1_BUTTON_STOCK_WHITE";
+		}
+
+		// AREA_PLAYER1_BUTTON_STOCK_BLACK
+		if (AREA_PLAYER1_BUTTON_STOCK_BLACK.contains(x, y)) {
+			return "AREA_PLAYER1_BUTTON_STOCK_BLACK";
+		}
+
+		// AREA_PLAYER2_BUTTON_OK
+		if (AREA_PLAYER2_BUTTON_OK.contains(x, y)) {
+			return "AREA_PLAYER2_BUTTON_OK";
+		}
+
+		// AREA_PLAYER2_BUTTON_STOCK_WHITE
+		if (AREA_PLAYER2_BUTTON_STOCK_WHITE.contains(x, y)) {
+			return "AREA_PLAYER2_BUTTON_STOCK_WHITE";
+		}
+
+		// AREA_PLAYER2_BUTTON_STOCK_BLACK
+		if (AREA_PLAYER2_BUTTON_STOCK_BLACK.contains(x, y)) {
+			return "AREA_PLAYER2_BUTTON_STOCK_BLACK";
+		}
+
+		return "AREA_NONE";
+	}
+	
+	public static Rect getArea(int id) {
+		switch(id){
+		case AREA_TILE_1_ID:
+			return AREA_TILE_1;
+		case AREA_TILE_2_ID:
+			return AREA_TILE_2;
+		case AREA_TILE_3_ID:
+			return AREA_TILE_3;
+		case AREA_TILE_4_ID:
+			return AREA_TILE_4;
+		case AREA_TILE_5_ID:
+			return AREA_TILE_5;
+		case AREA_TILE_6_ID:
+			return AREA_TILE_6;
+		case AREA_TILE_7_ID:
+			return AREA_TILE_7;
+		case AREA_TILE_8_ID:
+			return AREA_TILE_8;
+		case AREA_TILE_9_ID:
+			return AREA_TILE_9;
+		case AREA_TILE_10_ID:
+			return AREA_TILE_10;
+		case AREA_TILE_11_ID:
+			return AREA_TILE_11;
+		case AREA_TILE_12_ID:
+			return AREA_TILE_12;
+		case AREA_TILE_13_ID:
+			return AREA_TILE_13;
+		case AREA_TILE_14_ID:
+			return AREA_TILE_14;
+		case AREA_TILE_15_ID:
+			return AREA_TILE_15;
+		case AREA_TILE_16_ID:
+			return AREA_TILE_16;
+		case AREA_TILE_17_ID:
+			return AREA_TILE_17;
+		case AREA_TILE_18_ID:
+			return AREA_TILE_18;
+		case AREA_TILE_19_ID:
+			return AREA_TILE_19;
+		case AREA_TILE_20_ID:
+			return AREA_TILE_20;
+		case AREA_TILE_21_ID:
+			return AREA_TILE_21;
+		case AREA_TILE_22_ID:
+			return AREA_TILE_22;
+		case AREA_TILE_23_ID:
+			return AREA_TILE_23;
+		case AREA_TILE_24_ID:
+			return AREA_TILE_24;
+		case AREA_PLAYER1_STOCK_1_ID:
+			return AREA_PLAYER1_STOCK_1;
+		case AREA_PLAYER1_STOCK_2_ID:
+			return AREA_PLAYER1_STOCK_2;
+		case AREA_PLAYER1_STOCK_3_ID:
+			return AREA_PLAYER1_STOCK_3;
+		case AREA_PLAYER1_STOCK_4_ID:
+			return AREA_PLAYER1_STOCK_4;
+		case AREA_PLAYER2_STOCK_1_ID:
+			return AREA_PLAYER2_STOCK_1;
+		case AREA_PLAYER2_STOCK_2_ID:
+			return AREA_PLAYER2_STOCK_2;
+		case AREA_PLAYER2_STOCK_3_ID:
+			return AREA_PLAYER2_STOCK_3;
+		case AREA_PLAYER2_STOCK_4_ID:
+			return AREA_PLAYER2_STOCK_4;
+		case AREA_PLAYER1_BUTTON_OK_ID:
+			return AREA_PLAYER1_BUTTON_OK;
+		case AREA_PLAYER1_BUTTON_STOCK_WHITE_ID:
+			return AREA_PLAYER1_BUTTON_STOCK_WHITE;
+		case AREA_PLAYER1_BUTTON_STOCK_BLACK_ID:
+			return AREA_PLAYER1_BUTTON_STOCK_BLACK;
+		case AREA_PLAYER2_BUTTON_OK_ID:
+			return AREA_PLAYER2_BUTTON_OK;
+		case AREA_PLAYER2_BUTTON_STOCK_WHITE_ID:
+			return AREA_PLAYER2_BUTTON_STOCK_WHITE;
+		case AREA_PLAYER2_BUTTON_STOCK_BLACK_ID:
+			return AREA_PLAYER2_BUTTON_STOCK_BLACK;
+		default:
+			return null;
+		}
+	}
 
 	public static boolean isTile(int i) {
 		return i >= AREA_TILE_1_ID && i <= AREA_TILE_24_ID;
+	}
+	
+	public static boolean isPlayerStock(int i, int playerId) {
+		if(playerId  == 0 ){
+			return i == AREA_PLAYER1_STOCK_1_ID ||
+					i == AREA_PLAYER1_STOCK_2_ID ||
+					i == AREA_PLAYER1_STOCK_3_ID ||
+					i == AREA_PLAYER1_STOCK_4_ID;
+		}else{
+			return i == AREA_PLAYER2_STOCK_1_ID ||
+					i == AREA_PLAYER2_STOCK_2_ID ||
+					i == AREA_PLAYER2_STOCK_3_ID ||
+					i == AREA_PLAYER2_STOCK_4_ID;
+		}
+	}
+	
+	public static boolean isStockBtn(int i, int playerId) {
+		if(playerId  == 0 ){
+			return i == AREA_PLAYER1_BUTTON_STOCK_WHITE_ID ||
+					i == AREA_PLAYER1_BUTTON_STOCK_BLACK_ID;
+		}else{
+			return i == AREA_PLAYER2_BUTTON_STOCK_WHITE_ID ||
+					i == AREA_PLAYER2_BUTTON_STOCK_BLACK_ID;
+		}
 	}
 }

@@ -1,5 +1,5 @@
 package com.skula.robotory.enums;
 
 public enum SpawnColor {
-	WHITE, BLACK
+	WHITE, BLACK, NONE
 }
