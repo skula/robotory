@@ -6,18 +6,18 @@ public class UIArea {
 	public static final int TILE_WIDTH = 130; //OK
 	public static final int TILE_HEIGHT = 144; //OK
 	public static int BTN_OK_SIZE = 40;
-	public static int BTN_STOCK_SIZE = 40;
+	public static int BTN_STOCK_SIZE = 85;
 	public static int AREA_STOCK_SIZE = 40;
 	public static final int Y_SPACE = 8; //OK
 	public static final int X_SPACE = 10; //OK
 
-	private static final int COL_1_X = 52;
+	private static final int COL_1_X = 55;
 	private static final int COL_2_X = COL_1_X + X_SPACE + TILE_WIDTH;
 	private static final int COL_3_X = COL_2_X + X_SPACE + TILE_WIDTH;
 	private static final int COL_4_X = COL_3_X + X_SPACE + TILE_WIDTH;
 	private static final int COL_5_X = COL_4_X + X_SPACE + TILE_WIDTH;
 
-	private static final int COL_1_5_Y = 320;
+	private static final int COL_1_5_Y = 304;
 	private static final int COL_2_4_Y = COL_1_5_Y - TILE_HEIGHT / 2 - 5;
 	private static final int COL_3_Y = COL_2_4_Y - TILE_HEIGHT / 2 - 6;
 
@@ -94,14 +94,16 @@ public class UIArea {
 	// boutons joueur blanc
 	public static final int AREA_PLAYER1_BUTTON_OK_ID = 200;
 	public static final Rect AREA_PLAYER1_BUTTON_OK = new Rect(0, 0, BTN_OK_SIZE, BTN_OK_SIZE);
+	
 	public static final int AREA_PLAYER1_BUTTON_STOCK_WHITE_ID = 201;
-	public static final Rect AREA_PLAYER1_BUTTON_STOCK_WHITE = new Rect(0, 0, BTN_STOCK_SIZE, BTN_STOCK_SIZE);
+	public static final Rect AREA_PLAYER1_BUTTON_STOCK_WHITE = new Rect(555, 80, 555 + BTN_STOCK_SIZE, 80 + BTN_STOCK_SIZE);
 	public static final int AREA_PLAYER1_BUTTON_STOCK_BLACK_ID = 202;
-	public static final Rect AREA_PLAYER1_BUTTON_STOCK_BLACK = new Rect(0, 0, BTN_STOCK_SIZE, BTN_STOCK_SIZE);
+	public static final Rect AREA_PLAYER1_BUTTON_STOCK_BLACK = new Rect(675, 80, 675 + BTN_STOCK_SIZE, 80 + BTN_STOCK_SIZE);
 
 	// boutons joueur gris
 	public static final int AREA_PLAYER2_BUTTON_OK_ID = 210;
-	public static final Rect AREA_PLAYER2_BUTTON_OK = new Rect(0, 0, BTN_OK_SIZE, BTN_OK_SIZE);
+	public static final Rect AREA_PLAYER2_BUTTON_OK = new Rect(700, 0, BTN_OK_SIZE, BTN_OK_SIZE);
+	
 	public static final int AREA_PLAYER2_BUTTON_STOCK_WHITE_ID = 211;
 	public static final Rect AREA_PLAYER2_BUTTON_STOCK_WHITE = new Rect(0, 0, BTN_STOCK_SIZE, BTN_STOCK_SIZE);
 	public static final int AREA_PLAYER2_BUTTON_STOCK_BLACK_ID = 212;
