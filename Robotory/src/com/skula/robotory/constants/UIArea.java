@@ -3,13 +3,13 @@ package com.skula.robotory.constants;
 import android.graphics.Rect;
 
 public class UIArea {
-	public static final int TILE_WIDTH = 130; //OK
-	public static final int TILE_HEIGHT = 144; //OK
+	public static final int TILE_WIDTH = 130; // OK
+	public static final int TILE_HEIGHT = 144; // OK
 	public static int BTN_OK_SIZE = 40;
 	public static int BTN_STOCK_SIZE = 85;
 	public static int AREA_STOCK_SIZE = 40;
-	public static final int Y_SPACE = 8; //OK
-	public static final int X_SPACE = 10; //OK
+	public static final int Y_SPACE = 8; // OK
+	public static final int X_SPACE = 10; // OK
 
 	private static final int COL_1_X = 55;
 	private static final int COL_2_X = COL_1_X + X_SPACE + TILE_WIDTH;
@@ -94,26 +94,30 @@ public class UIArea {
 	// boutons joueur blanc
 	public static final int AREA_PLAYER1_BUTTON_OK_ID = 200;
 	public static final Rect AREA_PLAYER1_BUTTON_OK = new Rect(0, 0, BTN_OK_SIZE, BTN_OK_SIZE);
-	
+
 	public static final int AREA_PLAYER1_BUTTON_STOCK_WHITE_ID = 201;
-	public static final Rect AREA_PLAYER1_BUTTON_STOCK_WHITE = new Rect(555, 80, 555 + BTN_STOCK_SIZE, 80 + BTN_STOCK_SIZE);
+	public static final Rect AREA_PLAYER1_BUTTON_STOCK_WHITE = new Rect(555, 80, 555 + BTN_STOCK_SIZE,
+			80 + BTN_STOCK_SIZE);
 	public static final int AREA_PLAYER1_BUTTON_STOCK_BLACK_ID = 202;
-	public static final Rect AREA_PLAYER1_BUTTON_STOCK_BLACK = new Rect(675, 80, 675 + BTN_STOCK_SIZE, 80 + BTN_STOCK_SIZE);
+	public static final Rect AREA_PLAYER1_BUTTON_STOCK_BLACK = new Rect(675, 80, 675 + BTN_STOCK_SIZE,
+			80 + BTN_STOCK_SIZE);
 
 	// boutons joueur gris
 	public static final int AREA_PLAYER2_BUTTON_OK_ID = 210;
 	public static final Rect AREA_PLAYER2_BUTTON_OK = new Rect(700, 0, BTN_OK_SIZE, BTN_OK_SIZE);
-	
-	public static final int AREA_PLAYER2_BUTTON_STOCK_WHITE_ID = 211;
-	public static final Rect AREA_PLAYER2_BUTTON_STOCK_WHITE = new Rect(0, 0, BTN_STOCK_SIZE, BTN_STOCK_SIZE);
-	public static final int AREA_PLAYER2_BUTTON_STOCK_BLACK_ID = 212;
-	public static final Rect AREA_PLAYER2_BUTTON_STOCK_BLACK = new Rect(0, 0, BTN_STOCK_SIZE, BTN_STOCK_SIZE);
 
+	public static final int AREA_PLAYER2_BUTTON_STOCK_WHITE_ID = 211;
+	public static final Rect AREA_PLAYER2_BUTTON_STOCK_WHITE = new Rect(160, 1038, 160 + BTN_STOCK_SIZE, //40,138
+			1038 + BTN_STOCK_SIZE);
+	public static final int AREA_PLAYER2_BUTTON_STOCK_BLACK_ID = 212;
+	public static final Rect AREA_PLAYER2_BUTTON_STOCK_BLACK = new Rect(40, 1038, 40 + BTN_STOCK_SIZE, //40,138
+			1038 + BTN_STOCK_SIZE);
 	// néant
 	public static final int AREA_NONE_ID = -1;
 
 	private static Rect createArea(int x, int y, int dy) {
-		return new Rect(x, y + dy * (TILE_HEIGHT + Y_SPACE), x + TILE_WIDTH, y + dy * (TILE_HEIGHT + Y_SPACE) + TILE_HEIGHT);
+		return new Rect(x, y + dy * (TILE_HEIGHT + Y_SPACE), x + TILE_WIDTH, y + dy * (TILE_HEIGHT + Y_SPACE)
+				+ TILE_HEIGHT);
 	}
 
 	private static Rect createStock(int x, int y) {
@@ -316,7 +320,7 @@ public class UIArea {
 
 		return AREA_NONE_ID;
 	}
-	
+
 	public static String getAreaLabel(int x, int y) {
 		// AREA_TILE_1
 		if (AREA_TILE_1.contains(x, y)) {
@@ -513,9 +517,9 @@ public class UIArea {
 
 		return "AREA_NONE";
 	}
-	
+
 	public static Rect getArea(int id) {
-		switch(id){
+		switch (id) {
 		case AREA_TILE_1_ID:
 			return AREA_TILE_1;
 		case AREA_TILE_2_ID:
@@ -600,28 +604,22 @@ public class UIArea {
 	public static boolean isTile(int i) {
 		return i >= AREA_TILE_1_ID && i <= AREA_TILE_24_ID;
 	}
-	
+
 	public static boolean isPlayerStock(int i, int playerId) {
-		if(playerId  == 0 ){
-			return i == AREA_PLAYER1_STOCK_1_ID ||
-					i == AREA_PLAYER1_STOCK_2_ID ||
-					i == AREA_PLAYER1_STOCK_3_ID ||
-					i == AREA_PLAYER1_STOCK_4_ID;
-		}else{
-			return i == AREA_PLAYER2_STOCK_1_ID ||
-					i == AREA_PLAYER2_STOCK_2_ID ||
-					i == AREA_PLAYER2_STOCK_3_ID ||
-					i == AREA_PLAYER2_STOCK_4_ID;
+		if (playerId == 0) {
+			return i == AREA_PLAYER1_STOCK_1_ID || i == AREA_PLAYER1_STOCK_2_ID || i == AREA_PLAYER1_STOCK_3_ID
+					|| i == AREA_PLAYER1_STOCK_4_ID;
+		} else {
+			return i == AREA_PLAYER2_STOCK_1_ID || i == AREA_PLAYER2_STOCK_2_ID || i == AREA_PLAYER2_STOCK_3_ID
+					|| i == AREA_PLAYER2_STOCK_4_ID;
 		}
 	}
-	
+
 	public static boolean isStockBtn(int i, int playerId) {
-		if(playerId  == 0 ){
-			return i == AREA_PLAYER1_BUTTON_STOCK_WHITE_ID ||
-					i == AREA_PLAYER1_BUTTON_STOCK_BLACK_ID;
-		}else{
-			return i == AREA_PLAYER2_BUTTON_STOCK_WHITE_ID ||
-					i == AREA_PLAYER2_BUTTON_STOCK_BLACK_ID;
+		if (playerId == 0) {
+			return i == AREA_PLAYER1_BUTTON_STOCK_WHITE_ID || i == AREA_PLAYER1_BUTTON_STOCK_BLACK_ID;
+		} else {
+			return i == AREA_PLAYER2_BUTTON_STOCK_WHITE_ID || i == AREA_PLAYER2_BUTTON_STOCK_BLACK_ID;
 		}
 	}
 }
