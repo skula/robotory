@@ -1,10 +1,9 @@
 package com.skula.robotory.services;
+
 import com.skula.robotory.constants.UIArea;
 import com.skula.robotory.enums.Action;
 import com.skula.robotory.enums.Item;
-import com.skula.robotory.enums.SpawnColor;
 import com.skula.robotory.models.Matrix;
-
 
 public class GameEngine {
 	private static final int SPAWNS_COUNT = 14;
@@ -13,12 +12,16 @@ public class GameEngine {
 	private Action action;
 	private int srcArea;
 	private int destArea;
-	
+
 	private Item board[];
 	private int wSpawnleft;
 	private int bSpawnleft;
-	private SpawnColor p1Stock[];
-	private SpawnColor p2Stock[];
+	private Item p1Stock[];
+	private Item p2Stock[];
+
+	private boolean endRound;
+	
+	private String message;
 
 	public GameEngine() {
 		this.token = 0;
@@ -33,103 +36,152 @@ public class GameEngine {
 		this.wSpawnleft = SPAWNS_COUNT;
 		this.bSpawnleft = SPAWNS_COUNT;
 
-		this.p1Stock = new SpawnColor[4];
-		this.p2Stock = new SpawnColor[4];
-		for(int i=0; i<4; i++){
-			p1Stock[i] = SpawnColor.NONE;
-			p2Stock[i] = SpawnColor.NONE;
+		this.p1Stock = new Item[4];
+		this.p2Stock = new Item[4];
+		for (int i = 0; i < 4; i++) {
+			p1Stock[i] = Item.NONE;
+			p2Stock[i] = Item.NONE;
 		}
-		
+
 		this.action = Action.NONE;
 		this.srcArea = -1;
 		this.destArea = -1;
+
+		this.endRound = false;
+		
+		this.message = "";
 	}
 
 	public void nextPlayer() {
 		this.token = this.token == 0 ? 1 : 0;
 	}
-	
-	public boolean canProcess(){
-		switch(action){
+
+	public boolean canProcess() {
+		switch (action) {
 		case MOVE_ROBOT:
-			break;
+			if (!UIArea.isTile(destArea)) {
+				return false;
+			}
+			if (canMoveRobot(srcArea, destArea)) {
+				return true;
+			} else {
+				return false;
+			}
 		case PUT_SPAWN:
-			break;
+			if (!UIArea.isTile(destArea)) {
+				return false;
+			}
+			if (board[destArea].equals(Item.NONE)) {
+				return true;
+			} else {
+				return false;
+			}
 		case PICK_SPAWN:
-			break;
+			if (UIArea.isStockBtn(srcArea, token)) {
+				if (isStockFull(token)) {
+					return false;
+
+				}
+
+				// on test si il reste des pions d'energie dans la pioche
+				// commune
+				int tmp = 0;
+				switch (srcArea) {
+				case UIArea.AREA_PLAYER1_BUTTON_STOCK_WHITE_ID:
+					tmp = wSpawnleft;
+					break;
+				case UIArea.AREA_PLAYER1_BUTTON_STOCK_BLACK_ID:
+					tmp = bSpawnleft;
+					break;
+				case UIArea.AREA_PLAYER2_BUTTON_STOCK_WHITE_ID:
+					tmp = wSpawnleft;
+					break;
+				case UIArea.AREA_PLAYER2_BUTTON_STOCK_BLACK_ID:
+					tmp = bSpawnleft;
+					break;
+				}
+				if (tmp > 0) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
 		case NONE:
 			// Clique sur une zone vide
-			if(srcArea == UIArea.AREA_NONE_ID){
+			if (srcArea == UIArea.AREA_NONE_ID) {
 				return false;
-			}		
+			}
 			// Clique sur une tuile
-			if(UIArea.isTile(srcArea)){
-				if(isRobot(srcArea)){
+			if (UIArea.isTile(srcArea)) {
+				if (isRobot(srcArea)) {
 					return true;
-				}else{
+				} else {
 					return false;
 				}
-			// Clique sur un pion d'energie
-			}else if(UIArea.isPlayerStock(srcArea, token)){
-				SpawnColor sc = null; 
-				switch(srcArea){
-					case UIArea.AREA_PLAYER1_STOCK_1_ID:
-						sc = p1Stock[0];
-						break;
-					case UIArea.AREA_PLAYER1_STOCK_2_ID:
-						sc = p1Stock[1];
-						break;
-					case UIArea.AREA_PLAYER1_STOCK_3_ID:
-						sc = p1Stock[2];
-						break;
-					case UIArea.AREA_PLAYER1_STOCK_4_ID:
-						sc = p1Stock[3];
-						break;
-					case UIArea.AREA_PLAYER2_STOCK_1_ID:
-						sc = p2Stock[0];
-						break;
-					case UIArea.AREA_PLAYER2_STOCK_2_ID:
-						sc = p2Stock[1];
-						break;
-					case UIArea.AREA_PLAYER2_STOCK_3_ID:
-						sc = p2Stock[2];
-						break;
-					case UIArea.AREA_PLAYER2_STOCK_4_ID:
-						sc = p2Stock[3];
-						break;
-					default:
-						break;
+				// Clique sur un pion d'energie du stock d'un joueur
+			} else if (UIArea.isPlayerStock(srcArea, token)) {
+				Item sc = null;
+				switch (srcArea) {
+				case UIArea.AREA_PLAYER1_STOCK_1_ID:
+					sc = p1Stock[0];
+					break;
+				case UIArea.AREA_PLAYER1_STOCK_2_ID:
+					sc = p1Stock[1];
+					break;
+				case UIArea.AREA_PLAYER1_STOCK_3_ID:
+					sc = p1Stock[2];
+					break;
+				case UIArea.AREA_PLAYER1_STOCK_4_ID:
+					sc = p1Stock[3];
+					break;
+				case UIArea.AREA_PLAYER2_STOCK_1_ID:
+					sc = p2Stock[0];
+					break;
+				case UIArea.AREA_PLAYER2_STOCK_2_ID:
+					sc = p2Stock[1];
+					break;
+				case UIArea.AREA_PLAYER2_STOCK_3_ID:
+					sc = p2Stock[2];
+					break;
+				case UIArea.AREA_PLAYER2_STOCK_4_ID:
+					sc = p2Stock[3];
+					break;
+				default:
+					break;
 				}
-				if(sc.equals(SpawnColor.NONE)){
+				if (sc.equals(Item.NONE)) {
 					return false;
-				}else{
+				} else {
 					return true;
 				}
-			// Clique sur les boutons pour remplir le stock
-			}else if(UIArea.isStockBtn(srcArea, token)){
-				if(isStockFull(token)){
+				// Clique sur les boutons pour remplir le stock
+			} else if (UIArea.isStockBtn(srcArea, token)) {
+				if (isStockFull(token)) {
 					return false;
 				}
-				
-				// on test si il reste des pions d'energie dans la pioche commune
+
+				// on test si il reste des pions d'energie dans la pioche
+				// commune
 				int tmp = 0;
-				switch(srcArea){
-					case UIArea.AREA_PLAYER1_BUTTON_STOCK_WHITE_ID:
-						tmp = wSpawnleft;
-						break;
-					case UIArea.AREA_PLAYER1_BUTTON_STOCK_BLACK_ID:
-						tmp = bSpawnleft;
-						break;
-					case UIArea.AREA_PLAYER2_BUTTON_STOCK_WHITE_ID:
-						tmp = wSpawnleft;
-						break;
-					case UIArea.AREA_PLAYER2_BUTTON_STOCK_BLACK_ID:
-						tmp = bSpawnleft;
-						break;
+				switch (srcArea) {
+				case UIArea.AREA_PLAYER1_BUTTON_STOCK_WHITE_ID:
+					tmp = wSpawnleft;
+					break;
+				case UIArea.AREA_PLAYER1_BUTTON_STOCK_BLACK_ID:
+					tmp = bSpawnleft;
+					break;
+				case UIArea.AREA_PLAYER2_BUTTON_STOCK_WHITE_ID:
+					tmp = wSpawnleft;
+					break;
+				case UIArea.AREA_PLAYER2_BUTTON_STOCK_BLACK_ID:
+					tmp = bSpawnleft;
+					break;
 				}
-				if(tmp>0){
+				if (tmp > 0) {
 					return true;
-				}else{
+				} else {
 					return false;
 				}
 			}
@@ -139,22 +191,44 @@ public class GameEngine {
 		}
 		return true;
 	}
-	
-	public void process(){
-		switch(action){
+
+	public void process() {
+		switch (action) {
 		case MOVE_ROBOT:
+			moveRobot(srcArea, destArea);
+			endRound = true;
 			break;
 		case PUT_SPAWN:
+			putSpawn(srcArea, destArea);
+			endRound = true;
 			break;
 		case PICK_SPAWN:
 			break;
 		case NONE:
-			if(UIArea.isTile(srcArea)){
+			if (UIArea.isTile(srcArea)) {
 				action = Action.MOVE_ROBOT;
-			}else if(UIArea.isPlayerStock(srcArea, token)){
+			} else if (UIArea.isPlayerStock(srcArea, token)) {
 				action = Action.PUT_SPAWN;
-			}else{
-				// ????
+			} else if (UIArea.isStockBtn(srcArea, token)) {
+				if (token == 0) {
+					if (srcArea == UIArea.AREA_PLAYER1_BUTTON_STOCK_WHITE_ID) {
+						addStock(0, Item.WHITE_SPAWN);
+					} else {
+						addStock(0, Item.BLACK_SPAWN);
+					}
+				} else {
+					if (srcArea == UIArea.AREA_PLAYER2_BUTTON_STOCK_WHITE_ID) {
+						addStock(1, Item.WHITE_SPAWN);
+					} else {
+						addStock(1, Item.BLACK_SPAWN);
+					}
+				}
+
+				if (!isStockEmpty()) {
+					action = Action.PICK_SPAWN;
+				} else {
+					endRound = true;
+				}
 			}
 			break;
 		default:
@@ -162,79 +236,92 @@ public class GameEngine {
 		}
 	}
 
-	public boolean putSpawn(int dest, SpawnColor spawnColor) {
-		if (!board[dest].equals(Item.NONE)) {
-			return false;
-		}
-
-		switch (spawnColor) {
-		case WHITE:
-			board[dest] = Item.WHITE_SPAWN;
+	private void putSpawn(int src, int dest) {
+		switch (src) {
+		case UIArea.AREA_PLAYER1_STOCK_1_ID:
+			board[dest] = p1Stock[0];
+			p1Stock[0] = Item.NONE;
 			break;
-		case BLACK:
-			board[dest] = Item.BLACK_SPAWN;
+		case UIArea.AREA_PLAYER1_STOCK_2_ID:
+			board[dest] = p1Stock[1];
+			p1Stock[1] = Item.NONE;
+			break;
+		case UIArea.AREA_PLAYER1_STOCK_3_ID:
+			board[dest] = p1Stock[2];
+			p1Stock[2] = Item.NONE;
+			break;
+		case UIArea.AREA_PLAYER1_STOCK_4_ID:
+			board[dest] = p1Stock[3];
+			p1Stock[3] = Item.NONE;
+			break;
+		case UIArea.AREA_PLAYER2_STOCK_1_ID:
+			board[dest] = p2Stock[0];
+			p2Stock[0] = Item.NONE;
+			break;
+		case UIArea.AREA_PLAYER2_STOCK_2_ID:
+			board[dest] = p2Stock[1];
+			p2Stock[1] = Item.NONE;
+			break;
+		case UIArea.AREA_PLAYER2_STOCK_3_ID:
+			board[dest] = p2Stock[2];
+			p2Stock[2] = Item.NONE;
+			break;
+		case UIArea.AREA_PLAYER2_STOCK_4_ID:
+			board[dest] = p2Stock[3];
+			p2Stock[3] = Item.NONE;
 			break;
 		default:
 			break;
 		}
-
-		return true;
 	}
 
-	public boolean isEnd() {
+	private boolean isStockEmpty() {
 		return wSpawnleft + bSpawnleft == 0;
 	}
 
-	public boolean isRobot(int src) {
-		return board[src].equals(Item.RED_ROBOT)
-				|| board[src].equals(Item.BLACK_ROBOT)
+	private boolean isRobot(int src) {
+		return board[src].equals(Item.RED_ROBOT) || board[src].equals(Item.BLACK_ROBOT)
 				|| board[src].equals(Item.WHITE_ROBOT);
 	}
 
-	public boolean moveRobot(int src, int dest) {
-		if (!board[src].equals(Item.RED_ROBOT)
-				&& !board[src].equals(Item.BLACK_ROBOT)
-				&& !board[src].equals(Item.WHITE_ROBOT)) {
-			return false;
-		}
-
+	private boolean canMoveRobot(int src, int dest) {
 		if (!Matrix.areContiguous(src, dest)) {
 			return false;
 		}
 
-		if (!board[dest].equals(Item.WHITE_SPAWN)
-				&& !board[dest].equals(Item.BLACK_SPAWN)) {
+		switch (board[src]) {
+		case RED_ROBOT:
+			return board[dest].equals(Item.WHITE_SPAWN) || board[dest].equals(Item.BLACK_SPAWN);
+		case WHITE_ROBOT:
+			return board[dest].equals(Item.WHITE_SPAWN);
+		case BLACK_ROBOT:
+			return board[dest].equals(Item.BLACK_SPAWN);
+		default:
 			return false;
 		}
+	}
 
+	private void moveRobot(int src, int dest) {
 		switch (board[src]) {
 		case RED_ROBOT:
 			board[src] = Item.NONE;
 			board[dest] = Item.RED_ROBOT;
 			break;
 		case WHITE_ROBOT:
-			if (!board[dest].equals(Item.WHITE_SPAWN)) {
-				return false;
-			}
 			board[src] = Item.NONE;
 			board[dest] = Item.WHITE_ROBOT;
 			break;
 		case BLACK_ROBOT:
-			if (!board[dest].equals(Item.BLACK_SPAWN)) {
-				return false;
-			}
 			board[src] = Item.NONE;
 			board[dest] = Item.BLACK_ROBOT;
 			break;
 		default:
 			break;
 		}
-
-		return true;
 	}
 
-	public void addStock(SpawnColor color) {
-		if (token == 0) {
+	private void addStock(int playerId, Item color) {
+		if (playerId == 0) {
 			for (int i = 0; i < 4; i++) {
 				if (p1Stock[i] == null) {
 					p1Stock[i] = color;
@@ -250,68 +337,84 @@ public class GameEngine {
 			}
 		}
 	}
-	
-	public boolean isStockFull(int playerId){
-		if(playerId == 0){
-			for(SpawnColor sc : p1Stock){
-				if(sc.equals(SpawnColor.NONE)){
+
+	private boolean isStockFull(int playerId) {
+		if (playerId == 0) {
+			for (Item sc : p1Stock) {
+				if (sc.equals(Item.NONE)) {
 					return false;
 				}
 			}
-		}else{
-			for(SpawnColor sc : p1Stock){
-				if(sc.equals(SpawnColor.NONE)){
+		} else {
+			for (Item sc : p1Stock) {
+				if (sc.equals(Item.NONE)) {
 					return false;
 				}
 			}
 		}
-		
+
 		return true;
 	}
 
-	public SpawnColor getWhiteSpawn() {
+	private Item getWhiteSpawn() {
 		wSpawnleft--;
-		return SpawnColor.WHITE;
+		return Item.WHITE_SPAWN;
 	}
 
-	public SpawnColor getBlackSpawn() {
+	private Item getBlackSpawn() {
 		bSpawnleft--;
-		return SpawnColor.BLACK;
+		return Item.BLACK_SPAWN;
 	}
 
-	public boolean isWhiteSpawnleft() {
+	private boolean isWhiteSpawnleft() {
 		return wSpawnleft > 0;
 	}
 
-	public boolean isBlackSpawnleft() {
+	private boolean isBlackSpawnleft() {
 		return bSpawnleft > 0;
 	}
-	
-	public void setSrcArea(int area){
+
+	public void setSrcArea(int area) {
 		this.srcArea = area;
 	}
-	
-	public void setDestArea(int area){
+
+	public void setDestArea(int area) {
 		this.destArea = area;
 	}
-	
-	public int getSrcArea(){
+
+	public int getSrcArea() {
 		return srcArea;
 	}
-	
-	public int getDestArea(){
+
+	public int getDestArea() {
 		return destArea;
 	}
-	
-	public boolean isSrcSelected(){
+
+	public boolean isSrcSelected() {
 		return srcArea != -1;
 	}
-	
-	public boolean isDestSelected(){
+
+	public boolean isDestSelected() {
 		return destArea != -1;
 	}
-	
-	public Action getAction(){
+
+	public Action getAction() {
 		return action;
+	}
+
+	public Item[] getBoard() {
+		return board;
+	}
+
+	public int getToken() {
+		return token;
+	}
+	
+	public String getMessage(){
+		return message;
+	}
+	
+	public void setMessage(String message){
+		this.message = message;
 	}
 }

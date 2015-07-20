@@ -18,7 +18,7 @@ public class PictureLibrary{
 		
 		this.map.put(R.drawable.robot_black, 		BitmapFactory.decodeResource(res, R.drawable.robot_black));
 		this.map.put(R.drawable.robot_white, 		BitmapFactory.decodeResource(res, R.drawable.robot_white));
-		this.map.put(R.drawable.robot_red, 		BitmapFactory.decodeResource(res, R.drawable.robot_red));
+		this.map.put(R.drawable.robot_red, 			BitmapFactory.decodeResource(res, R.drawable.robot_red));
 
 		this.map.put(R.drawable.spawn_black, 		BitmapFactory.decodeResource(res, R.drawable.spawn_black));
 		this.map.put(R.drawable.spawn_white, 		BitmapFactory.decodeResource(res, R.drawable.spawn_white));

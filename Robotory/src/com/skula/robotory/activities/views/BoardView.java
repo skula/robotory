@@ -24,9 +24,9 @@ public class BoardView extends View {
 	public BoardView(Context context) {
 		super(context);
 		this.paint = new Paint();
-		this.drawer = new Drawer(res, null);
-		this.res = context.getResources();
 		this.ge = new GameEngine();
+		this.res = context.getResources();
+		this.drawer = new Drawer(res, ge);
 	}
 
 	@Override
@@ -42,8 +42,9 @@ public class BoardView extends View {
 		case MotionEvent.ACTION_UP:
 			// on recupère l'area du clique
 			int area = UIArea.getArea(x, y);
+			ge.setMessage(UIArea.getAreaLabel(x, y));
 			
-			if(ge.getAction().equals(Action.NONE)){
+			/*if(ge.getAction().equals(Action.NONE)){
 				ge.setSrcArea(area);
 			}else{
 				ge.setDestArea(area);
@@ -51,7 +52,7 @@ public class BoardView extends View {
 			
 			if(ge.canProcess()){
 				ge.process();
-			}
+			}*/
 		}
 		invalidate();
 		return true;
@@ -59,8 +60,6 @@ public class BoardView extends View {
 
 	@Override
 	public void draw(Canvas canvas) {
-		canvas.drawBitmap(BitmapFactory.decodeResource(res, R.drawable.background), new Rect(0, 0, 800, 1280),
-				new Rect(0, 0, 800, 1200), paint);
 		drawer.draw(canvas);
 	}
 }
