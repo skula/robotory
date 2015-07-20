@@ -15,6 +15,8 @@ import com.skula.robotory.enums.Action;
 import com.skula.robotory.services.Drawer;
 import com.skula.robotory.services.GameEngine;
 
+	// TODO:
+	// - tester chaque action pour chaque joueur
 public class BoardView extends View {
 	private Paint paint;
 	private Resources res;
@@ -28,7 +30,7 @@ public class BoardView extends View {
 		this.res = context.getResources();
 		this.drawer = new Drawer(res, ge);
 	}
-
+	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		int x = (int) event.getX();
@@ -42,17 +44,26 @@ public class BoardView extends View {
 		case MotionEvent.ACTION_UP:
 			// on recupère l'area du clique
 			int area = UIArea.getArea(x, y);
-			ge.setMessage(UIArea.getAreaLabel(x, y));
 			
-			/*if(ge.getAction().equals(Action.NONE)){
-				ge.setSrcArea(area);
-			}else{
-				ge.setDestArea(area);
+			if(!ge.isStockEmpty()){
+				ge.setMessage(UIArea.getAreaLabel(x, y));
+				
+				if(ge.getAction().equals(Action.NONE)){
+					ge.setSrcArea(area);
+				}else{
+					ge.setDestArea(area);
+				}
+				
+				if(ge.canProcess()){
+					ge.process();
+				}else{
+					if(ge.getAction().equals(Action.PICK_SPAWN)){
+						ge.setDestArea(-1);
+					}else{
+						ge.setSrcArea(-1);
+					}
+				}
 			}
-			
-			if(ge.canProcess()){
-				ge.process();
-			}*/
 		}
 		invalidate();
 		return true;

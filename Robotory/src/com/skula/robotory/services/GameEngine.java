@@ -1,13 +1,12 @@
 package com.skula.robotory.services;
 
+import com.skula.robotory.constants.Cnst;
 import com.skula.robotory.constants.UIArea;
 import com.skula.robotory.enums.Action;
 import com.skula.robotory.enums.Item;
 import com.skula.robotory.models.Matrix;
 
 public class GameEngine {
-	private static final int SPAWNS_COUNT = 14;
-
 	private int token;
 	private Action action;
 	private int srcArea;
@@ -25,20 +24,20 @@ public class GameEngine {
 
 	public GameEngine() {
 		this.token = 0;
-		this.board = new Item[24];
-		for (int i = 0; i < 24; i++) {
+		this.board = new Item[Cnst.TILES_COUNT];
+		for (int i = 0; i < Cnst.TILES_COUNT; i++) {
 			this.board[i] = Item.NONE;
 		}
 		this.board[10] = Item.RED_ROBOT;
 		this.board[13] = Item.WHITE_ROBOT;
 		this.board[14] = Item.BLACK_ROBOT;
 
-		this.wSpawnleft = SPAWNS_COUNT;
-		this.bSpawnleft = SPAWNS_COUNT;
+		this.wSpawnleft = Cnst.SPAWNS_COUNT;
+		this.bSpawnleft = Cnst.SPAWNS_COUNT;
 
-		this.p1Stock = new Item[4];
-		this.p2Stock = new Item[4];
-		for (int i = 0; i < 4; i++) {
+		this.p1Stock = new Item[Cnst.STOCK_SLOTS_COUNT];
+		this.p2Stock = new Item[Cnst.STOCK_SLOTS_COUNT];
+		for (int i = 0; i < Cnst.STOCK_SLOTS_COUNT; i++) {
 			p1Stock[i] = Item.NONE;
 			p2Stock[i] = Item.NONE;
 		}
@@ -53,6 +52,8 @@ public class GameEngine {
 	}
 
 	public void nextPlayer() {
+		this.action = Action.NONE;
+		this.endRound = false;
 		this.token = this.token == 0 ? 1 : 0;
 	}
 
@@ -203,12 +204,33 @@ public class GameEngine {
 			endRound = true;
 			break;
 		case PICK_SPAWN:
+			if (token == 0) {
+				if (srcArea == UIArea.AREA_PLAYER1_BUTTON_STOCK_WHITE_ID) {
+					addStock(0, Item.WHITE_SPAWN);
+				} else {
+					addStock(0, Item.BLACK_SPAWN);
+				}
+			} else {
+				if (srcArea == UIArea.AREA_PLAYER2_BUTTON_STOCK_WHITE_ID) {
+					addStock(1, Item.WHITE_SPAWN);
+				} else {
+					addStock(1, Item.BLACK_SPAWN);
+				}
+			}
+
+			if (!isStockEmpty()) {
+				action = Action.PICK_SPAWN;
+			} else {
+				endRound = true;
+			}
 			break;
 		case NONE:
 			if (UIArea.isTile(srcArea)) {
 				action = Action.MOVE_ROBOT;
+				endRound = true;
 			} else if (UIArea.isPlayerStock(srcArea, token)) {
 				action = Action.PUT_SPAWN;
+				endRound = true;
 			} else if (UIArea.isStockBtn(srcArea, token)) {
 				if (token == 0) {
 					if (srcArea == UIArea.AREA_PLAYER1_BUTTON_STOCK_WHITE_ID) {
@@ -275,7 +297,7 @@ public class GameEngine {
 		}
 	}
 
-	private boolean isStockEmpty() {
+	public boolean isStockEmpty() {
 		return wSpawnleft + bSpawnleft == 0;
 	}
 
@@ -416,5 +438,13 @@ public class GameEngine {
 	
 	public void setMessage(String message){
 		this.message = message;
+	}
+	
+	public Item[] getStock(int playerId){
+		if(playerId == 0){
+			return p1Stock;
+		}else{
+			return p2Stock;
+		}
 	}
 }
