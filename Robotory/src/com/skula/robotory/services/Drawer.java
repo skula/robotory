@@ -63,7 +63,7 @@ public class Drawer {
 		c.drawRect(UIArea.AREA_TILE_23, paint);
 		c.drawRect(UIArea.AREA_TILE_24, paint);
 
-		/*paint.setColor(Color.GREEN);
+		paint.setColor(Color.GREEN);
 		c.drawRect(UIArea.AREA_PLAYER1_STOCK_1, paint);
 		c.drawRect(UIArea.AREA_PLAYER1_STOCK_2, paint);
 		c.drawRect(UIArea.AREA_PLAYER1_STOCK_3, paint);
@@ -71,7 +71,7 @@ public class Drawer {
 		c.drawRect(UIArea.AREA_PLAYER2_STOCK_1, paint);
 		c.drawRect(UIArea.AREA_PLAYER2_STOCK_2, paint);
 		c.drawRect(UIArea.AREA_PLAYER2_STOCK_3, paint);
-		c.drawRect(UIArea.AREA_PLAYER2_STOCK_4, paint);*/
+		c.drawRect(UIArea.AREA_PLAYER2_STOCK_4, paint);
 
 		paint.setColor(Color.BLUE);
 		c.drawRect(UIArea.AREA_PLAYER1_BUTTON_STOCK_WHITE, paint);

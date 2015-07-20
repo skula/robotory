@@ -6,8 +6,8 @@ public class UIArea {
 	public static final int TILE_WIDTH = 130; // OK
 	public static final int TILE_HEIGHT = 144; // OK
 	public static int BTN_OK_SIZE = 40;
-	public static int BTN_STOCK_SIZE = 85;
-	public static int AREA_STOCK_SIZE = 40;
+	public static int BTN_STOCK_SIZE = 86;
+	public static int AREA_STOCK_SIZE = 87;
 	public static final int Y_SPACE = 8; // OK
 	public static final int X_SPACE = 10; // OK
 
@@ -73,23 +73,23 @@ public class UIArea {
 
 	// stock joueur blanc
 	public static final int AREA_PLAYER1_STOCK_1_ID = 100;
-	public static final Rect AREA_PLAYER1_STOCK_1 = createStock(0, 0);
+	public static final Rect AREA_PLAYER1_STOCK_1 = new Rect(238, 45, 238 + AREA_STOCK_SIZE, 45 + AREA_STOCK_SIZE);
 	public static final int AREA_PLAYER1_STOCK_2_ID = 101;
-	public static final Rect AREA_PLAYER1_STOCK_2 = createStock(0, 0);
+	public static final Rect AREA_PLAYER1_STOCK_2 = new Rect(138, 45, 138 + AREA_STOCK_SIZE, 45 + AREA_STOCK_SIZE);
 	public static final int AREA_PLAYER1_STOCK_3_ID = 102;
-	public static final Rect AREA_PLAYER1_STOCK_3 = createStock(0, 0);
+	public static final Rect AREA_PLAYER1_STOCK_3 = new Rect(88, 130, 88 + AREA_STOCK_SIZE, 130 + AREA_STOCK_SIZE);
 	public static final int AREA_PLAYER1_STOCK_4_ID = 103;
-	public static final Rect AREA_PLAYER1_STOCK_4 = createStock(0, 0);
+	public static final Rect AREA_PLAYER1_STOCK_4 = new Rect(38, 45, 38 + AREA_STOCK_SIZE, 45 + AREA_STOCK_SIZE);
 
 	// stock joueur gris
 	public static final int AREA_PLAYER2_STOCK_1_ID = 110;
-	public static final Rect AREA_PLAYER2_STOCK_1 = createStock(0, 0);
+	public static final Rect AREA_PLAYER2_STOCK_1 = new Rect(476, 1068, 476 + AREA_STOCK_SIZE, 1068 + AREA_STOCK_SIZE);
 	public static final int AREA_PLAYER2_STOCK_2_ID = 111;
-	public static final Rect AREA_PLAYER2_STOCK_2 = createStock(0, 0);
+	public static final Rect AREA_PLAYER2_STOCK_2 = new Rect(576, 1068, 576 + AREA_STOCK_SIZE, 1068 + AREA_STOCK_SIZE);
 	public static final int AREA_PLAYER2_STOCK_3_ID = 112;
-	public static final Rect AREA_PLAYER2_STOCK_3 = createStock(0, 0);
+	public static final Rect AREA_PLAYER2_STOCK_3 = new Rect(627, 983, 627 + AREA_STOCK_SIZE, 983 + AREA_STOCK_SIZE);
 	public static final int AREA_PLAYER2_STOCK_4_ID = 113;
-	public static final Rect AREA_PLAYER2_STOCK_4 = createStock(0, 0);
+	public static final Rect AREA_PLAYER2_STOCK_4 = new Rect(676, 1068, 676 + AREA_STOCK_SIZE, 1068 + AREA_STOCK_SIZE);
 
 	// boutons joueur blanc
 	public static final int AREA_PLAYER1_BUTTON_OK_ID = 200;
@@ -107,10 +107,10 @@ public class UIArea {
 	public static final Rect AREA_PLAYER2_BUTTON_OK = new Rect(700, 0, BTN_OK_SIZE, BTN_OK_SIZE);
 
 	public static final int AREA_PLAYER2_BUTTON_STOCK_WHITE_ID = 211;
-	public static final Rect AREA_PLAYER2_BUTTON_STOCK_WHITE = new Rect(160, 1038, 160 + BTN_STOCK_SIZE, //40,138
+	public static final Rect AREA_PLAYER2_BUTTON_STOCK_WHITE = new Rect(160, 1038, 160 + BTN_STOCK_SIZE, // 40,138
 			1038 + BTN_STOCK_SIZE);
 	public static final int AREA_PLAYER2_BUTTON_STOCK_BLACK_ID = 212;
-	public static final Rect AREA_PLAYER2_BUTTON_STOCK_BLACK = new Rect(40, 1038, 40 + BTN_STOCK_SIZE, //40,138
+	public static final Rect AREA_PLAYER2_BUTTON_STOCK_BLACK = new Rect(40, 1038, 40 + BTN_STOCK_SIZE, // 40,138
 			1038 + BTN_STOCK_SIZE);
 	// néant
 	public static final int AREA_NONE_ID = -1;
