@@ -33,7 +33,7 @@ public class Drawer {
 	public void draw(Canvas c) {
 		drawBackground(c);
 		drawBoard(c);
-		// drawPlayersStock(c);
+		drawPlayersStock(c);
 		// drawStockButtons(c);
 		// drawArea(c);
 		paint.setTextSize(30f);
@@ -107,7 +107,7 @@ public class Drawer {
 						paint);
 				break;
 			default:
-				rr = new Rect(r.left + 24, r.top + 30, r.left + 24 + SPAWN_SIZE, r.top + 30 + SPAWN_SIZE);
+				rr = new Rect(r.left + 24, r.top + 31, r.left + 24 + SPAWN_SIZE, r.top + 31 + SPAWN_SIZE);
 				drawSpawn(c, engine.getBoard()[i], rr);
 			}
 		}
@@ -119,16 +119,16 @@ public class Drawer {
 
 	private void drawPlayersStock(Canvas c) {
 		// player 1
-		drawSpawn(c, engine.getStock(0)[0], new Rect(0, 0, 80, 80));
-		drawSpawn(c, engine.getStock(0)[1], new Rect(0, 0, 80, 80));
-		drawSpawn(c, engine.getStock(0)[2], new Rect(0, 0, 80, 80));
-		drawSpawn(c, engine.getStock(0)[3], new Rect(0, 0, 80, 80));
+		drawSpawn(c, engine.getStock(0)[0], UIArea.AREA_PLAYER1_STOCK_1);
+		drawSpawn(c, engine.getStock(0)[1], UIArea.AREA_PLAYER1_STOCK_2);
+		drawSpawn(c, engine.getStock(0)[2], UIArea.AREA_PLAYER1_STOCK_3);
+		drawSpawn(c, engine.getStock(0)[3], UIArea.AREA_PLAYER1_STOCK_4);
 
 		// player 2
-		drawSpawn(c, engine.getStock(1)[0], new Rect(0, 0, 80, 80));
-		drawSpawn(c, engine.getStock(1)[1], new Rect(0, 0, 80, 80));
-		drawSpawn(c, engine.getStock(1)[2], new Rect(0, 0, 80, 80));
-		drawSpawn(c, engine.getStock(1)[3], new Rect(0, 0, 80, 80));
+		drawSpawn(c, engine.getStock(1)[0], UIArea.AREA_PLAYER2_STOCK_1);
+		drawSpawn(c, engine.getStock(1)[1], UIArea.AREA_PLAYER2_STOCK_2);
+		drawSpawn(c, engine.getStock(1)[2], UIArea.AREA_PLAYER2_STOCK_3);
+		drawSpawn(c, engine.getStock(1)[3], UIArea.AREA_PLAYER2_STOCK_4);
 	}
 
 	private void drawSpawn(Canvas c, Item i, Rect r) {

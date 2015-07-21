@@ -46,8 +46,8 @@ public class GameEngine {
 		this.p1Stock = new Item[Cnst.STOCK_SLOTS_COUNT];
 		this.p2Stock = new Item[Cnst.STOCK_SLOTS_COUNT];
 		for (int i = 0; i < Cnst.STOCK_SLOTS_COUNT; i++) {
-			p1Stock[i] = Item.NONE;
-			p2Stock[i] = Item.NONE;
+			p1Stock[i] = Item.WHITE_SPAWN;
+			p2Stock[i] = Item.BLACK_SPAWN;
 		}
 
 		this.action = Action.NONE;
