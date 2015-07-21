@@ -31,6 +31,14 @@ public class GameEngine {
 		this.board[10] = Item.RED_ROBOT;
 		this.board[13] = Item.WHITE_ROBOT;
 		this.board[14] = Item.BLACK_ROBOT;
+		
+		// bouchon
+		this.board[1] = Item.BLACK_SPAWN;
+		this.board[2] = Item.WHITE_SPAWN;
+		this.board[3] = Item.BLACK_SPAWN;
+		this.board[4] = Item.WHITE_SPAWN;
+		this.board[5] = Item.BLACK_SPAWN;
+		this.board[23] = Item.WHITE_SPAWN;
 
 		this.wSpawnleft = Cnst.SPAWNS_COUNT;
 		this.bSpawnleft = Cnst.SPAWNS_COUNT;

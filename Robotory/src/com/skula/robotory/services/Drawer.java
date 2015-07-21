@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 
 import com.skula.robotory.R;
+import com.skula.robotory.constants.Cnst;
 import com.skula.robotory.constants.PictureLibrary;
 import com.skula.robotory.constants.UIArea;
 import com.skula.robotory.enums.Item;
@@ -16,6 +17,9 @@ import com.skula.robotory.enums.Item;
 // - dessiner les bouton des stock avec chiffres dans les 2 sens
 // - bien positionner les images
 public class Drawer {
+	private static final int ROBOT_SIZE = 150;
+	private static final int SPAWN_SIZE = 80;
+
 	private PictureLibrary lib;
 	private Paint paint;
 	private GameEngine engine;
@@ -28,10 +32,10 @@ public class Drawer {
 
 	public void draw(Canvas c) {
 		drawBackground(c);
+		drawBoard(c);
 		// drawPlayersStock(c);
-		// drawBoard(c);
 		// drawStockButtons(c);
-		drawArea(c);
+		// drawArea(c);
 		paint.setTextSize(30f);
 		c.drawText(engine.getMessage(), 50, 50, paint);
 	}
@@ -86,45 +90,54 @@ public class Drawer {
 
 	private void drawBoard(Canvas c) {
 		Rect r = null;
-		for (int i = 0; i < 24; i++) {
+		for (int i = 0; i < Cnst.TILES_COUNT; i++) {
 			r = UIArea.getArea(i);
+			Rect rr = null;
 			switch (engine.getBoard()[i]) {
 			case WHITE_ROBOT:
-				c.drawBitmap(lib.get(R.drawable.robot_red), new Rect(0, 0, 20, 20), r, paint);
+				c.drawBitmap(lib.get(R.drawable.robot_white), new Rect(0, 0, ROBOT_SIZE, ROBOT_SIZE), getRobotSpot(r),
+						paint);
 				break;
 			case BLACK_ROBOT:
-				c.drawBitmap(lib.get(R.drawable.robot_white), new Rect(0, 0, 20, 20), r, paint);
+				c.drawBitmap(lib.get(R.drawable.robot_black), new Rect(0, 0, ROBOT_SIZE, ROBOT_SIZE), getRobotSpot(r),
+						paint);
 				break;
 			case RED_ROBOT:
-				c.drawBitmap(lib.get(R.drawable.robot_black), new Rect(0, 0, 20, 20), r, paint);
+				c.drawBitmap(lib.get(R.drawable.robot_red), new Rect(0, 0, ROBOT_SIZE, ROBOT_SIZE), getRobotSpot(r),
+						paint);
 				break;
 			default:
-				drawStockSpawn(c, engine.getBoard()[i], r);
+				rr = new Rect(r.left + 24, r.top + 30, r.left + 24 + SPAWN_SIZE, r.top + 30 + SPAWN_SIZE);
+				drawSpawn(c, engine.getBoard()[i], rr);
 			}
 		}
 	}
 
-	private void drawPlayersStock(Canvas c) {
-		// player 1
-		drawStockSpawn(c, engine.getStock(0)[0], new Rect(0, 0, 20, 20));
-		drawStockSpawn(c, engine.getStock(0)[1], new Rect(0, 0, 20, 20));
-		drawStockSpawn(c, engine.getStock(0)[2], new Rect(0, 0, 20, 20));
-		drawStockSpawn(c, engine.getStock(0)[3], new Rect(0, 0, 20, 20));
-
-		// player 2
-		drawStockSpawn(c, engine.getStock(1)[0], new Rect(0, 0, 20, 20));
-		drawStockSpawn(c, engine.getStock(1)[1], new Rect(0, 0, 20, 20));
-		drawStockSpawn(c, engine.getStock(1)[2], new Rect(0, 0, 20, 20));
-		drawStockSpawn(c, engine.getStock(1)[3], new Rect(0, 0, 20, 20));
+	private Rect getRobotSpot(Rect r) {
+		return new Rect(r.left - 10, r.top - 4, r.left - 10 + ROBOT_SIZE, r.top - 4 + ROBOT_SIZE);
 	}
 
-	private void drawStockSpawn(Canvas c, Item i, Rect r) {
+	private void drawPlayersStock(Canvas c) {
+		// player 1
+		drawSpawn(c, engine.getStock(0)[0], new Rect(0, 0, 80, 80));
+		drawSpawn(c, engine.getStock(0)[1], new Rect(0, 0, 80, 80));
+		drawSpawn(c, engine.getStock(0)[2], new Rect(0, 0, 80, 80));
+		drawSpawn(c, engine.getStock(0)[3], new Rect(0, 0, 80, 80));
+
+		// player 2
+		drawSpawn(c, engine.getStock(1)[0], new Rect(0, 0, 80, 80));
+		drawSpawn(c, engine.getStock(1)[1], new Rect(0, 0, 80, 80));
+		drawSpawn(c, engine.getStock(1)[2], new Rect(0, 0, 80, 80));
+		drawSpawn(c, engine.getStock(1)[3], new Rect(0, 0, 80, 80));
+	}
+
+	private void drawSpawn(Canvas c, Item i, Rect r) {
 		switch (i) {
 		case WHITE_SPAWN:
-			c.drawBitmap(lib.get(R.drawable.spawn_white), new Rect(0, 0, 20, 20), r, paint);
+			c.drawBitmap(lib.get(R.drawable.spawn_white), new Rect(0, 0, SPAWN_SIZE, SPAWN_SIZE), r, paint);
 			break;
 		case BLACK_SPAWN:
-			c.drawBitmap(lib.get(R.drawable.spawn_black), new Rect(0, 0, 800, 1200), r, paint);
+			c.drawBitmap(lib.get(R.drawable.spawn_black), new Rect(0, 0, SPAWN_SIZE, SPAWN_SIZE), r, paint);
 			break;
 		default:
 			break;
