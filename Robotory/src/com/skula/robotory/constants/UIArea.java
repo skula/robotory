@@ -601,6 +601,89 @@ public class UIArea {
 		}
 	}
 
+	public static String getAreaLabel(int id) {
+		switch (id) {
+		case AREA_TILE_1_ID:
+			return "AREA_TILE_1";
+		case AREA_TILE_2_ID:
+			return "AREA_TILE_2";
+		case AREA_TILE_3_ID:
+			return "AREA_TILE_3";
+		case AREA_TILE_4_ID:
+			return "AREA_TILE_4";
+		case AREA_TILE_5_ID:
+			return "AREA_TILE_5";
+		case AREA_TILE_6_ID:
+			return "AREA_TILE_6";
+		case AREA_TILE_7_ID:
+			return "AREA_TILE_7";
+		case AREA_TILE_8_ID:
+			return "AREA_TILE_8";
+		case AREA_TILE_9_ID:
+			return "AREA_TILE_9";
+		case AREA_TILE_10_ID:
+			return "AREA_TILE_10";
+		case AREA_TILE_11_ID:
+			return "AREA_TILE_11";
+		case AREA_TILE_12_ID:
+			return "AREA_TILE_12";
+		case AREA_TILE_13_ID:
+			return "AREA_TILE_13";
+		case AREA_TILE_14_ID:
+			return "AREA_TILE_14";
+		case AREA_TILE_15_ID:
+			return "AREA_TILE_15";
+		case AREA_TILE_16_ID:
+			return "AREA_TILE_16";
+		case AREA_TILE_17_ID:
+			return "AREA_TILE_17";
+		case AREA_TILE_18_ID:
+			return "AREA_TILE_18";
+		case AREA_TILE_19_ID:
+			return "AREA_TILE_19";
+		case AREA_TILE_20_ID:
+			return "AREA_TILE_20";
+		case AREA_TILE_21_ID:
+			return "AREA_TILE_21";
+		case AREA_TILE_22_ID:
+			return "AREA_TILE_22";
+		case AREA_TILE_23_ID:
+			return "AREA_TILE_23";
+		case AREA_TILE_24_ID:
+			return "AREA_TILE_24";
+		case AREA_PLAYER1_STOCK_1_ID:
+			return "AREA_PLAYER1_STOCK_1";
+		case AREA_PLAYER1_STOCK_2_ID:
+			return "AREA_PLAYER1_STOCK_2";
+		case AREA_PLAYER1_STOCK_3_ID:
+			return "AREA_PLAYER1_STOCK_3";
+		case AREA_PLAYER1_STOCK_4_ID:
+			return "AREA_PLAYER1_STOCK_4";
+		case AREA_PLAYER2_STOCK_1_ID:
+			return "AREA_PLAYER2_STOCK_1";
+		case AREA_PLAYER2_STOCK_2_ID:
+			return "AREA_PLAYER2_STOCK_2";
+		case AREA_PLAYER2_STOCK_3_ID:
+			return "AREA_PLAYER2_STOCK_3";
+		case AREA_PLAYER2_STOCK_4_ID:
+			return "AREA_PLAYER2_STOCK_4";
+		case AREA_PLAYER1_BUTTON_OK_ID:
+			return "AREA_PLAYER1_BUTTON_OK";
+		case AREA_PLAYER1_BUTTON_STOCK_WHITE_ID:
+			return "AREA_PLAYER1_BUTTON_STOCK_WHITE";
+		case AREA_PLAYER1_BUTTON_STOCK_BLACK_ID:
+			return "AREA_PLAYER1_BUTTON_STOCK_BLACK";
+		case AREA_PLAYER2_BUTTON_OK_ID:
+			return "AREA_PLAYER2_BUTTON_OK";
+		case AREA_PLAYER2_BUTTON_STOCK_WHITE_ID:
+			return "AREA_PLAYER2_BUTTON_STOCK_WHITE";
+		case AREA_PLAYER2_BUTTON_STOCK_BLACK_ID:
+			return "AREA_PLAYER2_BUTTON_STOCK_BLACK";
+		default:
+			return "AREA_NONE";
+		}
+	}
+	
 	public static boolean isTile(int i) {
 		return i >= AREA_TILE_1_ID && i <= AREA_TILE_24_ID;
 	}

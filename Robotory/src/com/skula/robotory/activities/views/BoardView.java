@@ -48,7 +48,7 @@ public class BoardView extends View {
 			if(!ge.isStockEmpty()){
 				ge.setMessage(UIArea.getAreaLabel(x, y));
 				
-				/*if(ge.getAction().equals(Action.NONE)){
+				if(ge.getAction().equals(Action.NONE)){
 					ge.setSrcArea(area);
 				}else{
 					ge.setDestArea(area);
@@ -62,7 +62,7 @@ public class BoardView extends View {
 					}else{
 						ge.setSrcArea(-1);
 					}
-				}*/
+				}
 			}
 		}
 		invalidate();

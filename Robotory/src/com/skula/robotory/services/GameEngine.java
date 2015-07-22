@@ -51,8 +51,8 @@ public class GameEngine {
 		}
 
 		this.action = Action.NONE;
-		this.srcArea = -1;
-		this.destArea = -1;
+		this.srcArea = UIArea.AREA_NONE_ID;
+		this.destArea = UIArea.AREA_NONE_ID;
 
 		this.endRound = false;
 		

@@ -36,8 +36,10 @@ public class Drawer {
 		drawPlayersStock(c);
 		// drawStockButtons(c);
 		// drawArea(c);
-		paint.setTextSize(30f);
-		c.drawText(engine.getMessage(), 50, 50, paint);
+		paint.setTextSize(25f);
+		paint.setColor(Color.RED);
+		c.drawText("Src: " + UIArea.getAreaLabel(engine.getSrcArea()), 300, 50, paint);
+		c.drawText("Dest: " + UIArea.getAreaLabel(engine.getDestArea()), 300, 100, paint);
 	}
 
 	private void drawArea(Canvas c) {
