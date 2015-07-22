@@ -1,5 +1,6 @@
 package com.skula.robotory.activities.views;
 
+import android.content.ClipData.Item;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
@@ -56,11 +57,18 @@ public class BoardView extends View {
 				
 				if(ge.canProcess()){
 					ge.process();
+					if(ge.isEndOfRound()){
+						ge.setSrcArea(UIArea.AREA_NONE_ID);
+						ge.setDestArea(UIArea.AREA_NONE_ID);
+						ge.nextPlayer();
+					}
 				}else{
 					if(ge.getAction().equals(Action.PICK_SPAWN)){
-						ge.setDestArea(-1);
+						ge.setDestArea(UIArea.AREA_NONE_ID);
 					}else{
-						ge.setSrcArea(-1);
+						ge.setSrcArea(UIArea.AREA_NONE_ID);
+						ge.setDestArea(UIArea.AREA_NONE_ID);
+						ge.setAction(Action.NONE);
 					}
 				}
 			}

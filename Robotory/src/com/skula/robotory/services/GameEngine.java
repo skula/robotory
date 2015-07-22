@@ -237,8 +237,11 @@ public class GameEngine {
 				action = Action.MOVE_ROBOT;
 				endRound = true;
 			} else if (UIArea.isPlayerStock(srcArea, token)) {
-				action = Action.PUT_SPAWN;
-				endRound = true;
+				if(destArea == UIArea.AREA_NONE_ID){
+					action = Action.PUT_SPAWN;
+				}else{
+					endRound = true;
+				}
 			} else if (UIArea.isStockBtn(srcArea, token)) {
 				if (token == 0) {
 					if (srcArea == UIArea.AREA_PLAYER1_BUTTON_STOCK_WHITE_ID) {
@@ -432,6 +435,10 @@ public class GameEngine {
 		return action;
 	}
 
+	public void setAction(Action action) {
+		this.action = action;
+	}
+
 	public Item[] getBoard() {
 		return board;
 	}
@@ -454,5 +461,9 @@ public class GameEngine {
 		}else{
 			return p2Stock;
 		}
+	}
+	
+	public boolean isEndOfRound(){
+		return endRound;
 	}
 }
