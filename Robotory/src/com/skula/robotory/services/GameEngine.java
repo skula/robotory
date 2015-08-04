@@ -189,6 +189,7 @@ public class GameEngine {
 					break;
 				}
 				if (tmp > 0) {
+					action = Action.PICK_SPAWN;
 					return true;
 				} else {
 					return false;
@@ -215,20 +216,22 @@ public class GameEngine {
 			if (token == 0) {
 				if (srcArea == UIArea.AREA_PLAYER1_BUTTON_STOCK_WHITE_ID) {
 					addStock(0, Item.WHITE_SPAWN);
+					srcArea = UIArea.AREA_NONE_ID;
 				} else {
 					addStock(0, Item.BLACK_SPAWN);
+					srcArea = UIArea.AREA_NONE_ID;
 				}
 			} else {
 				if (srcArea == UIArea.AREA_PLAYER2_BUTTON_STOCK_WHITE_ID) {
 					addStock(1, Item.WHITE_SPAWN);
+					srcArea = UIArea.AREA_NONE_ID;
 				} else {
 					addStock(1, Item.BLACK_SPAWN);
+					srcArea = UIArea.AREA_NONE_ID;
 				}
 			}
 
-			if (!isStockEmpty()) {
-				action = Action.PICK_SPAWN;
-			} else {
+			if (isStockEmpty()) {
 				endRound = true;
 			}
 			break;
@@ -356,14 +359,14 @@ public class GameEngine {
 	private void addStock(int playerId, Item color) {
 		if (playerId == 0) {
 			for (int i = 0; i < 4; i++) {
-				if (p1Stock[i] == null) {
+				if (p1Stock[i].equals(Item.NONE)) {
 					p1Stock[i] = color;
 					return;
 				}
 			}
 		} else {
 			for (int i = 0; i < 4; i++) {
-				if (p2Stock[i] == null) {
+				if (p2Stock[i].equals(Item.NONE)) {
 					p2Stock[i] = color;
 					return;
 				}
@@ -379,7 +382,7 @@ public class GameEngine {
 				}
 			}
 		} else {
-			for (Item sc : p1Stock) {
+			for (Item sc : p2Stock) {
 				if (sc.equals(Item.NONE)) {
 					return false;
 				}
