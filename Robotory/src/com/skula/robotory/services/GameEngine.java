@@ -189,6 +189,7 @@ public class GameEngine {
 					break;
 				}
 				if (tmp > 0) {
+					
 					action = Action.PICK_SPAWN;
 					return true;
 				} else {
@@ -231,9 +232,12 @@ public class GameEngine {
 				}
 			}
 
-			if (isStockEmpty()) {
+			if (isStockEmpty() || isPlayerStockFull(token)) {
 				endRound = true;
 			}
+			
+			srcArea = UIArea.AREA_NONE_ID;
+			destArea = UIArea.AREA_NONE_ID;
 			break;
 		case NONE:
 			if (UIArea.isTile(srcArea)) {
@@ -400,6 +404,23 @@ public class GameEngine {
 	private Item getBlackSpawn() {
 		bSpawnleft--;
 		return Item.BLACK_SPAWN;
+	}
+	
+	public boolean isPlayerStockFull(int playerid){
+		if(playerid == 0){
+			for(Item i : p1Stock){
+				if(i.equals(Item.NONE)){
+					return false;
+				}
+			}
+		}else{
+			for(Item i : p2Stock){
+				if(i.equals(Item.NONE)){
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	private boolean isWhiteSpawnleft() {
