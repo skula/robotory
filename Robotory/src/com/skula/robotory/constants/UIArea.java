@@ -112,6 +112,7 @@ public class UIArea {
 	public static final int AREA_PLAYER2_BUTTON_STOCK_BLACK_ID = 212;
 	public static final Rect AREA_PLAYER2_BUTTON_STOCK_BLACK = new Rect(40, 1038, 40 + BTN_STOCK_SIZE, // 40,138
 			1038 + BTN_STOCK_SIZE);
+	
 	// néant
 	public static final int AREA_NONE_ID = -1;
 

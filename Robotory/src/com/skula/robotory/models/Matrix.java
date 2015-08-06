@@ -44,4 +44,8 @@ public class Matrix {
 	public static boolean areContiguous(int src, int dest){
 		return grid[src][dest]==1;
 	}
+	
+	public static int[] getTileArray(int tile){
+		return grid[tile];
+	}
 }

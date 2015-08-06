@@ -71,6 +71,10 @@ public class GameEngine {
 			if (!UIArea.isTile(destArea)) {
 				return false;
 			}
+			// si on deselectionne le robot
+			if(srcArea == destArea){
+				return true;
+			}
 			if (canMoveRobot(srcArea, destArea)) {
 				return true;
 			} else {
@@ -89,11 +93,7 @@ public class GameEngine {
 			if (UIArea.isStockBtn(srcArea, token)) {
 				if (isStockFull(token)) {
 					return false;
-
 				}
-
-				// on test si il reste des pions d'energie dans la pioche
-				// commune
 				int tmp = 0;
 				switch (srcArea) {
 				case UIArea.AREA_PLAYER1_BUTTON_STOCK_WHITE_ID:
@@ -129,7 +129,7 @@ public class GameEngine {
 				} else {
 					return false;
 				}
-				// Clique sur un pion d'energie du stock d'un joueur
+			// Clique sur un pion d'energie du stock d'un joueur
 			} else if (UIArea.isPlayerStock(srcArea, token)) {
 				Item sc = null;
 				switch (srcArea) {
@@ -165,14 +165,11 @@ public class GameEngine {
 				} else {
 					return true;
 				}
-				// Clique sur les boutons pour remplir le stock
+			// Clique sur les boutons pour remplir le stock
 			} else if (UIArea.isStockBtn(srcArea, token)) {
 				if (isStockFull(token)) {
 					return false;
 				}
-
-				// on test si il reste des pions d'energie dans la pioche
-				// commune
 				int tmp = 0;
 				switch (srcArea) {
 				case UIArea.AREA_PLAYER1_BUTTON_STOCK_WHITE_ID:
@@ -206,8 +203,18 @@ public class GameEngine {
 	public void process() {
 		switch (action) {
 		case MOVE_ROBOT:
-			moveRobot(srcArea, destArea);
-			endRound = true;
+			// arret des deplacements du robot (clique sur lui mm)
+			if(srcArea == destArea){
+				endRound = true;
+			// deplacement du robot
+			}else{
+				moveRobot(srcArea, destArea);
+				srcArea = destArea;
+				destArea = UIArea.AREA_NONE_ID;
+				if (!canMoveRobot(srcArea)) { // A CREER LA FONCTION canMoveRobot(int tileId)
+					endRound = true;
+				}
+			}
 			break;
 		case PUT_SPAWN:
 			putSpawn(srcArea, destArea);
@@ -339,6 +346,23 @@ public class GameEngine {
 			return false;
 		}
 	}
+	
+	private boolean canMoveRobot(int tileId) {
+		int grid[] = Matrix.getTileArray(tileId);
+		for(int i=0; i<grid.length; i++){
+			if(grid[i] == 1){
+				switch (board[tileId]) {
+				case RED_ROBOT:
+					return board[i].equals(Item.BLACK_SPAWN) || board[i].equals(Item.WHITE_SPAWN);
+				case WHITE_ROBOT:
+					return board[i].equals(Item.WHITE_SPAWN);
+				case BLACK_ROBOT:
+					return board[i].equals(Item.BLACK_SPAWN) ;
+				}
+			}
+		}
+		return false;
+	}
 
 	private void moveRobot(int src, int dest) {
 		switch (board[src]) {
@@ -364,6 +388,11 @@ public class GameEngine {
 			for (int i = 0; i < 4; i++) {
 				if (p1Stock[i].equals(Item.NONE)) {
 					p1Stock[i] = color;
+					if(color.equals(Item.BLACK_SPAWN)){
+						bSpawnleft--;
+					}else{
+						wSpawnleft--;
+					}
 					return;
 				}
 			}
@@ -371,6 +400,11 @@ public class GameEngine {
 			for (int i = 0; i < 4; i++) {
 				if (p2Stock[i].equals(Item.NONE)) {
 					p2Stock[i] = color;
+					if(color.equals(Item.BLACK_SPAWN)){
+						bSpawnleft--;
+					}else{
+						wSpawnleft--;
+					}
 					return;
 				}
 			}
@@ -428,6 +462,14 @@ public class GameEngine {
 
 	private boolean isBlackSpawnleft() {
 		return bSpawnleft > 0;
+	}
+	
+	public int getWhiteSpawnleft(){
+		return wSpawnleft;
+	}
+	
+	public int getBlackSpawnleft(){
+		return bSpawnleft;
 	}
 
 	public void setSrcArea(int area) {
