@@ -242,7 +242,6 @@ public class GameEngine {
 		case NONE:
 			if (UIArea.isTile(srcArea)) {
 				action = Action.MOVE_ROBOT;
-				endRound = true;
 			} else if (UIArea.isPlayerStock(srcArea, token)) {
 				if(destArea == UIArea.AREA_NONE_ID){
 					action = Action.PUT_SPAWN;
