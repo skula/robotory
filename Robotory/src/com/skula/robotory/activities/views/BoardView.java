@@ -16,8 +16,8 @@ import com.skula.robotory.enums.Action;
 import com.skula.robotory.services.Drawer;
 import com.skula.robotory.services.GameEngine;
 
-	// TODO:
-	// - tester chaque action pour chaque joueur
+// TODO:
+// - tester chaque action pour chaque joueur
 public class BoardView extends View {
 	private Paint paint;
 	private Resources res;
@@ -31,7 +31,7 @@ public class BoardView extends View {
 		this.res = context.getResources();
 		this.drawer = new Drawer(res, ge);
 	}
-	
+
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		int x = (int) event.getX();
@@ -45,30 +45,36 @@ public class BoardView extends View {
 		case MotionEvent.ACTION_UP:
 			// on recupère l'area du clique
 			int area = UIArea.getArea(x, y);
-			
-			if(!ge.isStockEmpty()){
+
+			if (!ge.isStockEmpty()) {
 				ge.setMessage(UIArea.getAreaLabel(x, y));
-				
-				if(ge.getAction().equals(Action.NONE) || ge.getAction().equals(Action.PICK_SPAWN)){
+
+				if (ge.getAction().equals(Action.NONE) || ge.getAction().equals(Action.PICK_SPAWN)) {
 					ge.setSrcArea(area);
-				}else{
+				} else {
 					ge.setDestArea(area);
 				}
-				
-				if(ge.canProcess()){
+
+				if (ge.canProcess()) {
 					ge.process();
-					if(ge.isEndOfRound()){
+					if (ge.isEndOfRound()) {
 						ge.setSrcArea(UIArea.AREA_NONE_ID);
 						ge.setDestArea(UIArea.AREA_NONE_ID);
 						ge.nextPlayer();
 					}
-				}else{
-					if(ge.getAction().equals(Action.PICK_SPAWN)){
+				} else {
+					switch (ge.getAction()) {
+					case PICK_SPAWN:
 						ge.setDestArea(UIArea.AREA_NONE_ID);
-					}else{
+						break;
+					case MOVE_ROBOT:
+						ge.setDestArea(UIArea.AREA_NONE_ID);
+						break;
+					default:
 						ge.setSrcArea(UIArea.AREA_NONE_ID);
 						ge.setDestArea(UIArea.AREA_NONE_ID);
 						ge.setAction(Action.NONE);
+						break;
 					}
 				}
 			}

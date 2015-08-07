@@ -124,7 +124,7 @@ public class GameEngine {
 			}
 			// Clique sur une tuile
 			if (UIArea.isTile(srcArea)) {
-				if (isRobot(srcArea)) {
+				if (isRobot(srcArea) && canMoveRobot(srcArea)) {
 					return true;
 				} else {
 					return false;
@@ -351,13 +351,19 @@ public class GameEngine {
 		int grid[] = Matrix.getTileArray(tileId);
 		for(int i=0; i<grid.length; i++){
 			if(grid[i] == 1){
-				switch (board[tileId]) {
+				switch (board[srcArea]) {
 				case RED_ROBOT:
-					return board[i].equals(Item.BLACK_SPAWN) || board[i].equals(Item.WHITE_SPAWN);
+					if(board[i].equals(Item.BLACK_SPAWN) || board[i].equals(Item.WHITE_SPAWN)){
+						return true;
+					}
 				case WHITE_ROBOT:
-					return board[i].equals(Item.WHITE_SPAWN);
+					if(board[i].equals(Item.WHITE_SPAWN)){
+						return true;
+					}
 				case BLACK_ROBOT:
-					return board[i].equals(Item.BLACK_SPAWN) ;
+					if(board[i].equals(Item.BLACK_SPAWN)){
+						return true;
+					}
 				}
 			}
 		}
