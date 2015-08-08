@@ -24,8 +24,11 @@ public class BoardView extends View {
 	private Drawer drawer;
 	private GameEngine ge;
 
+	private boolean endOfGame;
+
 	public BoardView(Context context) {
 		super(context);
+		this.endOfGame = false;
 		this.paint = new Paint();
 		this.ge = new GameEngine();
 		this.res = context.getResources();
@@ -44,37 +47,43 @@ public class BoardView extends View {
 			break;
 		case MotionEvent.ACTION_UP:
 			// on recupère l'area du clique
-			int area = UIArea.getArea(x, y);
+			if (!endOfGame) {
+				int area = UIArea.getArea(x, y);
 
-			if (!ge.isStockEmpty()) {
-				ge.setMessage(UIArea.getAreaLabel(x, y));
+				if (!ge.isStockEmpty()) {
+					ge.setMessage(UIArea.getAreaLabel(x, y));
 
-				if (ge.getAction().equals(Action.NONE) || ge.getAction().equals(Action.PICK_SPAWN)) {
-					ge.setSrcArea(area);
-				} else {
-					ge.setDestArea(area);
-				}
-
-				if (ge.canProcess()) {
-					ge.process();
-					if (ge.isEndOfRound()) {
-						ge.setSrcArea(UIArea.AREA_NONE_ID);
-						ge.setDestArea(UIArea.AREA_NONE_ID);
-						ge.nextPlayer();
+					if (ge.getAction().equals(Action.NONE) || ge.getAction().equals(Action.PICK_SPAWN)) {
+						ge.setSrcArea(area);
+					} else {
+						ge.setDestArea(area);
 					}
-				} else {
-					switch (ge.getAction()) {
-					case PICK_SPAWN:
-						ge.setDestArea(UIArea.AREA_NONE_ID);
-						break;
-					case MOVE_ROBOT:
-						ge.setDestArea(UIArea.AREA_NONE_ID);
-						break;
-					default:
-						ge.setSrcArea(UIArea.AREA_NONE_ID);
-						ge.setDestArea(UIArea.AREA_NONE_ID);
-						ge.setAction(Action.NONE);
-						break;
+
+					if (ge.canProcess()) {
+						ge.process();
+						if (ge.isStockEmpty()) {
+							endOfGame = true;
+						} else {
+							if (ge.isEndOfRound()) {
+								ge.setSrcArea(UIArea.AREA_NONE_ID);
+								ge.setDestArea(UIArea.AREA_NONE_ID);
+								ge.nextPlayer();
+							}
+						}
+					} else {
+						switch (ge.getAction()) {
+						case PICK_SPAWN:
+							ge.setDestArea(UIArea.AREA_NONE_ID);
+							break;
+						case MOVE_ROBOT:
+							ge.setDestArea(UIArea.AREA_NONE_ID);
+							break;
+						default:
+							ge.setSrcArea(UIArea.AREA_NONE_ID);
+							ge.setDestArea(UIArea.AREA_NONE_ID);
+							ge.setAction(Action.NONE);
+							break;
+						}
 					}
 				}
 			}
@@ -85,6 +94,10 @@ public class BoardView extends View {
 
 	@Override
 	public void draw(Canvas canvas) {
-		drawer.draw(canvas);
+		if (!endOfGame) {
+			drawer.draw(canvas);
+		} else {
+			drawer.drawEndGame(canvas);
+		}
 	}
 }

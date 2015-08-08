@@ -79,6 +79,12 @@ public class PictureLibrary{
 		this.map.put(R.drawable.btn_wstock_p2_13,		BitmapFactory.decodeResource(res, R.drawable.btn_wstock_p2_13));
 		this.map.put(R.drawable.btn_bstock_p2_14,		BitmapFactory.decodeResource(res, R.drawable.btn_bstock_p2_14));
 		this.map.put(R.drawable.btn_wstock_p2_14,		BitmapFactory.decodeResource(res, R.drawable.btn_wstock_p2_14));
+		
+		this.map.put(R.drawable.p1_defeat,		BitmapFactory.decodeResource(res, R.drawable.p1_defeat));
+		this.map.put(R.drawable.p2_defeat,		BitmapFactory.decodeResource(res, R.drawable.p2_defeat));
+		this.map.put(R.drawable.p1_victory,		BitmapFactory.decodeResource(res, R.drawable.p1_victory));
+		this.map.put(R.drawable.p2_victory,		BitmapFactory.decodeResource(res, R.drawable.p2_victory));
+		this.map.put(R.drawable.background_endgame,		BitmapFactory.decodeResource(res, R.drawable.background_endgame));
 
 	}
 		
