@@ -34,9 +34,11 @@ public class Drawer {
 		// drawArea(c);
 		paint.setTextSize(25f);
 		paint.setColor(Color.RED);
-		c.drawText("Src: " + UIArea.getAreaLabel(engine.getSrcArea()), 300, 50, paint);
-		c.drawText("Dest: " + UIArea.getAreaLabel(engine.getDestArea()), 300, 100, paint);
-		c.drawText("Joueur " + (engine.getToken() + 1), 300, 150, paint);
+		
+		// log
+		//c.drawText("Src: " + UIArea.getAreaLabel(engine.getSrcArea()), 300, 50, paint);
+		//c.drawText("Dest: " + UIArea.getAreaLabel(engine.getDestArea()), 300, 100, paint);
+		//c.drawText("Joueur " + (engine.getToken() + 1), 300, 150, paint);
 	}
 
 	public void drawEndGame(Canvas c) {

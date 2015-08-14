@@ -94,9 +94,9 @@ public class BoardView extends View {
 
 	@Override
 	public void draw(Canvas canvas) {
-		if (!endOfGame) {
-			drawer.draw(canvas);
-		} else {
+		
+		drawer.draw(canvas);
+		if (endOfGame) {
 			drawer.drawEndGame(canvas);
 		}
 	}
