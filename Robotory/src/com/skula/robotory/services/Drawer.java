@@ -1,16 +1,21 @@
 package com.skula.robotory.services;
 
+import android.content.res.AssetManager;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 
 import com.skula.robotory.R;
 import com.skula.robotory.constants.Cnst;
+import com.skula.robotory.constants.DrawAreas;
 import com.skula.robotory.constants.PictureLibrary;
 import com.skula.robotory.constants.UIArea;
 import com.skula.robotory.enums.Item;
+import com.skula.robotory.models.Point;
 
 public class Drawer {
 	private static final int ROBOT_SIZE = 150;
@@ -18,20 +23,22 @@ public class Drawer {
 
 	private PictureLibrary lib;
 	private Paint paint;
+	private AssetManager assetManager;
 	private GameEngine engine;
 
 	public Drawer(Resources res, GameEngine engine) {
 		this.engine = engine;
 		this.paint = new Paint();
+		this.assetManager = res.getAssets();
 		this.lib = new PictureLibrary(res);
 	}
 
 	public void draw(Canvas c) {
 		drawBackground(c);
 		drawBoard(c);
-		drawPlayersStock(c);
 		drawStockButtons(c);
-		// drawArea(c);
+		//drawPlayersStock(c);
+		//drawArea(c);
 		paint.setTextSize(25f);
 		paint.setColor(Color.RED);
 		
@@ -39,6 +46,13 @@ public class Drawer {
 		//c.drawText("Src: " + UIArea.getAreaLabel(engine.getSrcArea()), 300, 50, paint);
 		//c.drawText("Dest: " + UIArea.getAreaLabel(engine.getDestArea()), 300, 100, paint);
 		//c.drawText("Joueur " + (engine.getToken() + 1), 300, 150, paint);
+	
+		Typeface plain = Typeface.createFromAsset(assetManager, "fonts/gothic.ttf"); 
+		Paint paint = new Paint();
+		paint.setTypeface(plain);
+		paint.setTextSize(50f);
+		paint.setColor(Color.WHITE);
+		c.drawText("Sample text in GOTHIC.TTF",100,100,paint);
 	}
 
 	public void drawEndGame(Canvas c) {
@@ -98,7 +112,8 @@ public class Drawer {
 	}
 
 	private void drawBackground(Canvas c) {
-		c.drawBitmap(lib.get(R.drawable.background), new Rect(0, 0, 800, 1280), new Rect(0, 0, 800, 1200), paint);
+		//c.drawBitmap(lib.get(R.drawable.background), new Rect(0, 0, 800, 1280), new Rect(0, 0, 800, 1200), paint);
+		drawPict(c, R.drawable.background, DrawAreas.BOARD);
 	}
 
 	private void drawBoard(Canvas c) {
@@ -108,16 +123,13 @@ public class Drawer {
 			Rect rr = null;
 			switch (engine.getBoard()[i]) {
 			case WHITE_ROBOT:
-				c.drawBitmap(lib.get(R.drawable.robot_white), new Rect(0, 0, ROBOT_SIZE, ROBOT_SIZE), getRobotSpot(r),
-						paint);
+				drawPict(c, R.drawable.robot_white, getRobotSpot(r, R.drawable.robot_white));
 				break;
 			case BLACK_ROBOT:
-				c.drawBitmap(lib.get(R.drawable.robot_black), new Rect(0, 0, ROBOT_SIZE, ROBOT_SIZE), getRobotSpot(r),
-						paint);
+				drawPict(c, R.drawable.robot_black, getRobotSpot(r, R.drawable.robot_black));
 				break;
 			case RED_ROBOT:
-				c.drawBitmap(lib.get(R.drawable.robot_red), new Rect(0, 0, ROBOT_SIZE, ROBOT_SIZE), getRobotSpot(r),
-						paint);
+				drawPict(c, R.drawable.robot_red, getRobotSpot(r, R.drawable.robot_red));
 				break;
 			default:
 				rr = new Rect(r.left + 24, r.top + 31, r.left + 24 + SPAWN_SIZE, r.top + 31 + SPAWN_SIZE);
@@ -126,8 +138,8 @@ public class Drawer {
 		}
 	}
 
-	private Rect getRobotSpot(Rect r) {
-		return new Rect(r.left - 10, r.top - 4, r.left - 10 + ROBOT_SIZE, r.top - 4 + ROBOT_SIZE);
+	private Rect getRobotSpot(Rect r, int dId) {
+		return new Rect(r.left - 10, r.top - 4, r.left - 10 + lib.get(dId).getWidth(), r.top - 4 + lib.get(dId).getHeight());
 	}
 
 	private void drawPlayersStock(Canvas c) {
@@ -298,4 +310,16 @@ public class Drawer {
 		}
 	}
 
+	private void drawPict(Canvas c, int id, Point p) {
+		Bitmap bmp = lib.get(id);
+		Rect src = new Rect(0, 0, bmp.getWidth(), bmp.getHeight());
+		Rect dest = new Rect(0 + p.getX(), 0 + p.getY(), bmp.getWidth() + p.getX(), bmp.getHeight() + p.getY());
+		c.drawBitmap(bmp, src, dest, paint);
+	}
+
+	private void drawPict(Canvas c, int id, Rect dest) {
+		Bitmap bmp = lib.get(id);
+		Rect src = new Rect(0, 0, bmp.getWidth(), bmp.getHeight());
+		c.drawBitmap(bmp, src, dest, paint);
+	}
 }
