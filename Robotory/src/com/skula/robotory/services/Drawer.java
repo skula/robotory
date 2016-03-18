@@ -47,12 +47,12 @@ public class Drawer {
 		//c.drawText("Dest: " + UIArea.getAreaLabel(engine.getDestArea()), 300, 100, paint);
 		//c.drawText("Joueur " + (engine.getToken() + 1), 300, 150, paint);
 	
-		Typeface plain = Typeface.createFromAsset(assetManager, "fonts/gothic.ttf"); 
+		Typeface plain = Typeface.createFromAsset(assetManager, "fonts/OCRASTD.OTF"); 
 		Paint paint = new Paint();
 		paint.setTypeface(plain);
 		paint.setTextSize(50f);
 		paint.setColor(Color.WHITE);
-		c.drawText("Sample text in GOTHIC.TTF",100,100,paint);
+		c.drawText("123456789",100,100,paint);
 	}
 
 	public void drawEndGame(Canvas c) {
