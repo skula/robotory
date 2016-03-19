@@ -1,7 +1,6 @@
 package com.skula.robotory.services;
 
 import android.content.res.AssetManager;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,6 +9,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 
 import com.skula.robotory.R;
+import com.skula.robotory.activities.views.BoardView;
 import com.skula.robotory.constants.Cnst;
 import com.skula.robotory.constants.DrawAreas;
 import com.skula.robotory.constants.PictureLibrary;
@@ -26,33 +26,49 @@ public class Drawer {
 	private AssetManager assetManager;
 	private GameEngine engine;
 
-	public Drawer(Resources res, GameEngine engine) {
+	private int measuredWidth;
+	private int measuredHeight;
+
+	public Drawer(BoardView view, GameEngine engine) {
 		this.engine = engine;
 		this.paint = new Paint();
-		this.assetManager = res.getAssets();
-		this.lib = new PictureLibrary(res);
+		this.assetManager = view.getResources().getAssets();
+		this.lib = new PictureLibrary(view.getResources());
+		this.measuredWidth = view.getMeasuredWidth();
+		this.measuredHeight = view.getMeasuredHeight();
 	}
 
 	public void draw(Canvas c) {
 		drawBackground(c);
 		drawBoard(c);
 		drawStockButtons(c);
-		//drawPlayersStock(c);
-		//drawArea(c);
-		paint.setTextSize(25f);
-		paint.setColor(Color.RED);
-		
-		// log
-		//c.drawText("Src: " + UIArea.getAreaLabel(engine.getSrcArea()), 300, 50, paint);
-		//c.drawText("Dest: " + UIArea.getAreaLabel(engine.getDestArea()), 300, 100, paint);
-		//c.drawText("Joueur " + (engine.getToken() + 1), 300, 150, paint);
-	
-		Typeface plain = Typeface.createFromAsset(assetManager, "fonts/OCRASTD.OTF"); 
-		Paint paint = new Paint();
+		// drawPlayersStock(c);
+		// drawArea(c);
+	}
+
+	private void drawText(Canvas c, Paint paint,  boolean reverse, String txt, Point p) {
+		Typeface plain = Typeface.createFromAsset(assetManager, "fonts/OCRASTD.OTF");
 		paint.setTypeface(plain);
-		paint.setTextSize(50f);
+		paint.setTextSize(60f);
+		if (reverse) {
+			int cx = measuredWidth / 2;
+			int cy = measuredHeight / 2;
+			c.save();
+			c.scale(1f, -1f, cx, cy);
+			c.drawText(txt, cx + p.getX(), cy - p.getY(), paint);
+			c.restore();
+		} else {
+			c.drawText(txt, p.getX(), p.getY(), paint);
+		}
+	}
+
+	private void drawStockButtons(Canvas c) {
 		paint.setColor(Color.WHITE);
-		c.drawText("123456789",100,100,paint);
+		drawText(c, paint, true, engine.getWhiteSpawnleft()+"", new Point(960,265));
+		//drawText(c, paint, false, engine.getWhiteSpawnleft()+"", new Point(950,250));
+		paint.setColor(Color.BLACK);
+		drawText(c, paint, true, engine.getBlackSpawnleft()+"", new Point(850,265));
+		//drawText(c, paint, false, engine.getBlackSpawnleft()+"", new Point(900,250));
 	}
 
 	public void drawEndGame(Canvas c) {
@@ -112,7 +128,8 @@ public class Drawer {
 	}
 
 	private void drawBackground(Canvas c) {
-		//c.drawBitmap(lib.get(R.drawable.background), new Rect(0, 0, 800, 1280), new Rect(0, 0, 800, 1200), paint);
+		// c.drawBitmap(lib.get(R.drawable.background), new Rect(0, 0, 800,
+		// 1280), new Rect(0, 0, 800, 1200), paint);
 		drawPict(c, R.drawable.background, DrawAreas.BOARD);
 	}
 
@@ -139,7 +156,8 @@ public class Drawer {
 	}
 
 	private Rect getRobotSpot(Rect r, int dId) {
-		return new Rect(r.left - 10, r.top - 4, r.left - 10 + lib.get(dId).getWidth(), r.top - 4 + lib.get(dId).getHeight());
+		return new Rect(r.left - 10, r.top - 4, r.left - 10 + lib.get(dId).getWidth(), r.top - 4
+				+ lib.get(dId).getHeight());
 	}
 
 	private void drawPlayersStock(Canvas c) {
@@ -166,147 +184,6 @@ public class Drawer {
 			break;
 		default:
 			break;
-		}
-	}
-
-	private void drawStockButtons(Canvas c) {
-		int idp1 = 0;
-		int idp2 = 0;
-
-		switch (engine.getWhiteSpawnleft()) {
-		case 1:
-			idp1 = R.drawable.btn_wstock_p1_01;
-			idp2 = R.drawable.btn_wstock_p2_01;
-			break;
-		case 2:
-			idp1 = R.drawable.btn_wstock_p1_02;
-			idp2 = R.drawable.btn_wstock_p2_02;
-			break;
-		case 3:
-			idp1 = R.drawable.btn_wstock_p1_03;
-			idp2 = R.drawable.btn_wstock_p2_03;
-			break;
-		case 4:
-			idp1 = R.drawable.btn_wstock_p1_04;
-			idp2 = R.drawable.btn_wstock_p2_04;
-			break;
-		case 5:
-			idp1 = R.drawable.btn_wstock_p1_05;
-			idp2 = R.drawable.btn_wstock_p2_05;
-			break;
-		case 6:
-			idp1 = R.drawable.btn_wstock_p1_06;
-			idp2 = R.drawable.btn_wstock_p2_06;
-			break;
-		case 7:
-			idp1 = R.drawable.btn_wstock_p1_07;
-			idp2 = R.drawable.btn_wstock_p2_07;
-			break;
-		case 8:
-			idp1 = R.drawable.btn_wstock_p1_08;
-			idp2 = R.drawable.btn_wstock_p2_08;
-			break;
-		case 9:
-			idp1 = R.drawable.btn_wstock_p1_09;
-			idp2 = R.drawable.btn_wstock_p2_09;
-			break;
-		case 10:
-			idp1 = R.drawable.btn_wstock_p1_10;
-			idp2 = R.drawable.btn_wstock_p2_10;
-			break;
-		case 11:
-			idp1 = R.drawable.btn_wstock_p1_11;
-			idp2 = R.drawable.btn_wstock_p2_11;
-			break;
-		case 12:
-			idp1 = R.drawable.btn_wstock_p1_12;
-			idp2 = R.drawable.btn_wstock_p2_12;
-			break;
-		case 13:
-			idp1 = R.drawable.btn_wstock_p1_13;
-			idp2 = R.drawable.btn_wstock_p2_13;
-			break;
-		case 14:
-			idp1 = R.drawable.btn_wstock_p1_14;
-			idp2 = R.drawable.btn_wstock_p2_14;
-			break;
-		default:
-			idp1 = -1;
-			idp2 = -1;
-			break;
-		}
-
-		if (idp1 != -1 || idp2 != -1) {
-			c.drawBitmap(lib.get(idp1), new Rect(0, 0, 100, 100), UIArea.AREA_PLAYER1_BUTTON_STOCK_WHITE, paint);
-			c.drawBitmap(lib.get(idp2), new Rect(0, 0, 100, 100), UIArea.AREA_PLAYER2_BUTTON_STOCK_WHITE, paint);
-		}
-
-		switch (engine.getBlackSpawnleft()) {
-		case 1:
-			idp1 = R.drawable.btn_bstock_p1_01;
-			idp2 = R.drawable.btn_bstock_p2_01;
-			break;
-		case 2:
-			idp1 = R.drawable.btn_bstock_p1_02;
-			idp2 = R.drawable.btn_bstock_p2_02;
-			break;
-		case 3:
-			idp1 = R.drawable.btn_bstock_p1_03;
-			idp2 = R.drawable.btn_bstock_p2_03;
-			break;
-		case 4:
-			idp1 = R.drawable.btn_bstock_p1_04;
-			idp2 = R.drawable.btn_bstock_p2_04;
-			break;
-		case 5:
-			idp1 = R.drawable.btn_bstock_p1_05;
-			idp2 = R.drawable.btn_bstock_p2_05;
-			break;
-		case 6:
-			idp1 = R.drawable.btn_bstock_p1_06;
-			idp2 = R.drawable.btn_bstock_p2_06;
-			break;
-		case 7:
-			idp1 = R.drawable.btn_bstock_p1_07;
-			idp2 = R.drawable.btn_bstock_p2_07;
-			break;
-		case 8:
-			idp1 = R.drawable.btn_bstock_p1_08;
-			idp2 = R.drawable.btn_bstock_p2_08;
-			break;
-		case 9:
-			idp1 = R.drawable.btn_bstock_p1_09;
-			idp2 = R.drawable.btn_bstock_p2_09;
-			break;
-		case 10:
-			idp1 = R.drawable.btn_bstock_p1_10;
-			idp2 = R.drawable.btn_bstock_p2_10;
-			break;
-		case 11:
-			idp1 = R.drawable.btn_bstock_p1_11;
-			idp2 = R.drawable.btn_bstock_p2_11;
-			break;
-		case 12:
-			idp1 = R.drawable.btn_bstock_p1_12;
-			idp2 = R.drawable.btn_bstock_p2_12;
-			break;
-		case 13:
-			idp1 = R.drawable.btn_bstock_p1_13;
-			idp2 = R.drawable.btn_bstock_p2_13;
-			break;
-		case 14:
-			idp1 = R.drawable.btn_bstock_p1_14;
-			idp2 = R.drawable.btn_bstock_p2_14;
-			break;
-		default:
-			idp1 = -1;
-			idp2 = -1;
-			break;
-		}
-
-		if (idp1 != -1 || idp2 != -1) {
-			c.drawBitmap(lib.get(idp1), new Rect(0, 0, 100, 100), UIArea.AREA_PLAYER1_BUTTON_STOCK_BLACK, paint);
-			c.drawBitmap(lib.get(idp2), new Rect(0, 0, 100, 100), UIArea.AREA_PLAYER2_BUTTON_STOCK_BLACK, paint);
 		}
 	}
 

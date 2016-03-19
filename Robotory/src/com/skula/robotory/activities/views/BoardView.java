@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -32,7 +34,7 @@ public class BoardView extends View {
 		this.paint = new Paint();
 		this.ge = new GameEngine();
 		this.res = context.getResources();
-		this.drawer = new Drawer(res, ge);
+		this.drawer = new Drawer(this, ge);
 	}
 
 	@Override
@@ -94,6 +96,7 @@ public class BoardView extends View {
 
 	@Override
 	public void draw(Canvas canvas) {
+		
 		
 		drawer.draw(canvas);
 		if (endOfGame) {
