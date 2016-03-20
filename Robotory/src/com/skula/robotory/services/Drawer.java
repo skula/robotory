@@ -46,7 +46,7 @@ public class Drawer {
 		// drawArea(c);
 	}
 
-	private void drawText(Canvas c, Paint paint,  boolean reverse, String txt, Point p) {
+	private void drawText(Canvas c, Paint paint, boolean reverse, String txt, Point p) {
 		Typeface plain = Typeface.createFromAsset(assetManager, "fonts/OCRASTD.OTF");
 		paint.setTypeface(plain);
 		paint.setTextSize(60f);
@@ -54,8 +54,8 @@ public class Drawer {
 			int cx = measuredWidth / 2;
 			int cy = measuredHeight / 2;
 			c.save();
-			c.scale(1f, -1f, cx, cy);
-			c.drawText(txt, cx + p.getX(), cy - p.getY(), paint);
+			c.rotate(180, p.getX(), p.getY());
+			c.drawText(txt, cx + p.getX(), cy + p.getY(), paint);
 			c.restore();
 		} else {
 			c.drawText(txt, p.getX(), p.getY(), paint);
@@ -64,11 +64,11 @@ public class Drawer {
 
 	private void drawStockButtons(Canvas c) {
 		paint.setColor(Color.WHITE);
-		drawText(c, paint, true, engine.getWhiteSpawnleft()+"", new Point(960,265));
-		//drawText(c, paint, false, engine.getWhiteSpawnleft()+"", new Point(950,250));
+		drawText(c, paint, true, engine.getWhiteSpawnleft() + "", DrawAreas.P1_BLACK_PAWN);
+		drawText(c, paint, false, engine.getWhiteSpawnleft() + "", DrawAreas.P2_BLACK_PAWN);
 		paint.setColor(Color.BLACK);
-		drawText(c, paint, true, engine.getBlackSpawnleft()+"", new Point(850,265));
-		//drawText(c, paint, false, engine.getBlackSpawnleft()+"", new Point(900,250));
+		drawText(c, paint, true, engine.getBlackSpawnleft() + "", DrawAreas.P1_WHITE_PAWN);
+		drawText(c, paint, false, engine.getBlackSpawnleft() + "", DrawAreas.P2_WHITE_PAWN);
 	}
 
 	public void drawEndGame(Canvas c) {
