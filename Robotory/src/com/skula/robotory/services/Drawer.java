@@ -7,12 +7,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.text.method.Touch;
 
 import com.skula.robotory.R;
 import com.skula.robotory.activities.views.BoardView;
 import com.skula.robotory.constants.Cnst;
 import com.skula.robotory.constants.DrawAreas;
 import com.skula.robotory.constants.PictureLibrary;
+import com.skula.robotory.constants.TouchArea;
 import com.skula.robotory.constants.UIArea;
 import com.skula.robotory.enums.Item;
 import com.skula.robotory.models.Point;
@@ -40,10 +42,10 @@ public class Drawer {
 
 	public void draw(Canvas c) {
 		drawBackground(c);
-		drawBoard(c);
+		//drawBoard(c);
 		drawStockButtons(c);
 		// drawPlayersStock(c);
-		// drawArea(c);
+		drawTouchArea(c);
 	}
 
 	private void drawText(Canvas c, Paint paint, boolean reverse, String txt, Point p) {
@@ -83,9 +85,34 @@ public class Drawer {
 		}
 	}
 
-	private void drawArea(Canvas c) {
+	private void drawTouchArea(Canvas c) {
 		paint.setColor(Color.RED);
-		c.drawRect(UIArea.AREA_TILE_1, paint);
+		paint.setStyle(Paint.Style.STROKE);
+		c.drawRect(TouchArea.TILE_1, paint);
+		c.drawRect(TouchArea.TILE_2, paint);
+		c.drawRect(TouchArea.TILE_3, paint);
+		c.drawRect(TouchArea.TILE_4, paint);
+		c.drawRect(TouchArea.TILE_5, paint);
+		c.drawRect(TouchArea.TILE_6, paint);
+		c.drawRect(TouchArea.TILE_7, paint);
+		c.drawRect(TouchArea.TILE_8, paint);
+		c.drawRect(TouchArea.TILE_9, paint);
+		c.drawRect(TouchArea.TILE_10, paint);
+		c.drawRect(TouchArea.TILE_11, paint);
+		c.drawRect(TouchArea.TILE_12, paint);
+		c.drawRect(TouchArea.TILE_13, paint);
+		c.drawRect(TouchArea.TILE_14, paint);
+		c.drawRect(TouchArea.TILE_15, paint);
+		c.drawRect(TouchArea.TILE_16, paint);
+		c.drawRect(TouchArea.TILE_17, paint);
+		c.drawRect(TouchArea.TILE_18, paint);
+		c.drawRect(TouchArea.TILE_19, paint);
+		c.drawRect(TouchArea.TILE_20, paint);
+		c.drawRect(TouchArea.TILE_21, paint);
+		c.drawRect(TouchArea.TILE_22, paint);
+		c.drawRect(TouchArea.TILE_23, paint);
+		c.drawRect(TouchArea.TILE_24, paint);
+		/*c.drawRect(UIArea.AREA_TILE_1, paint);
 		c.drawRect(UIArea.AREA_TILE_2, paint);
 		c.drawRect(UIArea.AREA_TILE_3, paint);
 		c.drawRect(UIArea.AREA_TILE_4, paint);
@@ -108,7 +135,7 @@ public class Drawer {
 		c.drawRect(UIArea.AREA_TILE_21, paint);
 		c.drawRect(UIArea.AREA_TILE_22, paint);
 		c.drawRect(UIArea.AREA_TILE_23, paint);
-		c.drawRect(UIArea.AREA_TILE_24, paint);
+		c.drawRect(UIArea.AREA_TILE_24, paint);*/
 
 		paint.setColor(Color.GREEN);
 		c.drawRect(UIArea.AREA_PLAYER1_STOCK_1, paint);
