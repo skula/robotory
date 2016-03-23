@@ -112,46 +112,22 @@ public class Drawer {
 		c.drawRect(TouchArea.TILE_22, paint);
 		c.drawRect(TouchArea.TILE_23, paint);
 		c.drawRect(TouchArea.TILE_24, paint);
-		/*c.drawRect(UIArea.AREA_TILE_1, paint);
-		c.drawRect(UIArea.AREA_TILE_2, paint);
-		c.drawRect(UIArea.AREA_TILE_3, paint);
-		c.drawRect(UIArea.AREA_TILE_4, paint);
-		c.drawRect(UIArea.AREA_TILE_5, paint);
-		c.drawRect(UIArea.AREA_TILE_6, paint);
-		c.drawRect(UIArea.AREA_TILE_7, paint);
-		c.drawRect(UIArea.AREA_TILE_8, paint);
-		c.drawRect(UIArea.AREA_TILE_9, paint);
-		c.drawRect(UIArea.AREA_TILE_10, paint);
-		c.drawRect(UIArea.AREA_TILE_11, paint);
-		c.drawRect(UIArea.AREA_TILE_12, paint);
-		c.drawRect(UIArea.AREA_TILE_13, paint);
-		c.drawRect(UIArea.AREA_TILE_14, paint);
-		c.drawRect(UIArea.AREA_TILE_15, paint);
-		c.drawRect(UIArea.AREA_TILE_16, paint);
-		c.drawRect(UIArea.AREA_TILE_17, paint);
-		c.drawRect(UIArea.AREA_TILE_18, paint);
-		c.drawRect(UIArea.AREA_TILE_19, paint);
-		c.drawRect(UIArea.AREA_TILE_20, paint);
-		c.drawRect(UIArea.AREA_TILE_21, paint);
-		c.drawRect(UIArea.AREA_TILE_22, paint);
-		c.drawRect(UIArea.AREA_TILE_23, paint);
-		c.drawRect(UIArea.AREA_TILE_24, paint);*/
-
-		paint.setColor(Color.GREEN);
-		c.drawRect(UIArea.AREA_PLAYER1_STOCK_1, paint);
-		c.drawRect(UIArea.AREA_PLAYER1_STOCK_2, paint);
-		c.drawRect(UIArea.AREA_PLAYER1_STOCK_3, paint);
-		c.drawRect(UIArea.AREA_PLAYER1_STOCK_4, paint);
-		c.drawRect(UIArea.AREA_PLAYER2_STOCK_1, paint);
-		c.drawRect(UIArea.AREA_PLAYER2_STOCK_2, paint);
-		c.drawRect(UIArea.AREA_PLAYER2_STOCK_3, paint);
-		c.drawRect(UIArea.AREA_PLAYER2_STOCK_4, paint);
 
 		paint.setColor(Color.BLUE);
-		c.drawRect(UIArea.AREA_PLAYER1_BUTTON_STOCK_WHITE, paint);
-		c.drawRect(UIArea.AREA_PLAYER1_BUTTON_STOCK_BLACK, paint);
-		c.drawRect(UIArea.AREA_PLAYER2_BUTTON_STOCK_WHITE, paint);
-		c.drawRect(UIArea.AREA_PLAYER2_BUTTON_STOCK_BLACK, paint);
+		c.drawRect(TouchArea.PLAYER1_STOCK_1, paint);
+		c.drawRect(TouchArea.PLAYER1_STOCK_2, paint);
+		c.drawRect(TouchArea.PLAYER1_STOCK_3, paint);
+		c.drawRect(TouchArea.PLAYER1_STOCK_4, paint);
+		c.drawRect(TouchArea.PLAYER2_STOCK_1, paint);
+		c.drawRect(TouchArea.PLAYER2_STOCK_2, paint);
+		c.drawRect(TouchArea.PLAYER2_STOCK_3, paint);
+		c.drawRect(TouchArea.PLAYER2_STOCK_4, paint);
+
+		paint.setColor(Color.YELLOW);
+		c.drawRect(TouchArea.AREA_PLAYER1_BUTTON_STOCK_BLACK, paint);
+		c.drawRect(TouchArea.AREA_PLAYER1_BUTTON_STOCK_WHITE, paint);
+		c.drawRect(TouchArea.AREA_PLAYER2_BUTTON_STOCK_BLACK, paint);
+		c.drawRect(TouchArea.AREA_PLAYER2_BUTTON_STOCK_WHITE, paint);
 	}
 
 	private void drawBackground(Canvas c) {
