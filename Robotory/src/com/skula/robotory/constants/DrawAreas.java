@@ -10,6 +10,4 @@ public class DrawAreas {
 	public static final Point P1_WHITE_PAWN = new Point(X0 + 840, Y0 + 138);
 	public static final Point P2_BLACK_PAWN = new Point(X0 + 70, Y0 + 1465);
 	public static final Point P2_WHITE_PAWN = new Point(X0 + 225, Y0 + 1465);
-	
-	public static final Point REA_PLAYER1_STOCK_1 = new Point(405, 200);
 }
