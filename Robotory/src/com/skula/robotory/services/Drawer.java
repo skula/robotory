@@ -15,7 +15,6 @@ import com.skula.robotory.constants.Cnst;
 import com.skula.robotory.constants.DrawAreas;
 import com.skula.robotory.constants.PictureLibrary;
 import com.skula.robotory.constants.TouchArea;
-import com.skula.robotory.constants.UIArea;
 import com.skula.robotory.enums.Item;
 import com.skula.robotory.models.Point;
 
@@ -124,10 +123,10 @@ public class Drawer {
 		c.drawRect(TouchArea.PLAYER2_STOCK_4, paint);
 
 		paint.setColor(Color.YELLOW);
-		c.drawRect(TouchArea.AREA_PLAYER1_BUTTON_STOCK_BLACK, paint);
-		c.drawRect(TouchArea.AREA_PLAYER1_BUTTON_STOCK_WHITE, paint);
-		c.drawRect(TouchArea.AREA_PLAYER2_BUTTON_STOCK_BLACK, paint);
-		c.drawRect(TouchArea.AREA_PLAYER2_BUTTON_STOCK_WHITE, paint);
+		c.drawRect(TouchArea.PLAYER1_STOCK_BLACK, paint);
+		c.drawRect(TouchArea.PLAYER1_STOCK_WHITE, paint);
+		c.drawRect(TouchArea.PLAYER2_STOCK_BLACK, paint);
+		c.drawRect(TouchArea.PLAYER2_STOCK_WHITE, paint);
 	}
 
 	private void drawBackground(Canvas c) {
@@ -139,7 +138,7 @@ public class Drawer {
 	private void drawBoard(Canvas c) {
 		Rect r = null;
 		for (int i = 0; i < Cnst.TILES_COUNT; i++) {
-			r = UIArea.getArea(i);
+			r = TouchArea.getArea(i);
 			Rect rr = null;
 			switch (engine.getBoard()[i]) {
 			case WHITE_ROBOT:
@@ -153,7 +152,7 @@ public class Drawer {
 				break;
 			default:
 				rr = new Rect(r.left + 24, r.top + 31, r.left + 24 + SPAWN_SIZE, r.top + 31 + SPAWN_SIZE);
-				drawSpawn(c, engine.getBoard()[i], rr);
+				drawPict(c, getPawnDrawId(engine.getBoard()[i]), rr);
 			}
 		}
 	}
@@ -163,31 +162,26 @@ public class Drawer {
 				+ lib.get(dId).getHeight());
 	}
 
+	private int getPawnDrawId(Item i){
+		if(i == Item.WHITE_SPAWN){
+			return R.drawable.spawn_white;
+		}else{
+			return R.drawable.spawn_black;
+		}
+	}
+	
 	private void drawPlayersStock(Canvas c) {
 		// player 1
-		drawSpawn(c, engine.getStock(0)[0], UIArea.AREA_PLAYER1_STOCK_1);
-		drawSpawn(c, engine.getStock(0)[1], UIArea.AREA_PLAYER1_STOCK_2);
-		drawSpawn(c, engine.getStock(0)[2], UIArea.AREA_PLAYER1_STOCK_3);
-		drawSpawn(c, engine.getStock(0)[3], UIArea.AREA_PLAYER1_STOCK_4);
-
+		drawPict(c, getPawnDrawId(engine.getStock(0)[0]), TouchArea.PLAYER1_STOCK_1);
+		drawPict(c, getPawnDrawId(engine.getStock(0)[1]), TouchArea.PLAYER1_STOCK_2);
+		drawPict(c, getPawnDrawId(engine.getStock(0)[2]), TouchArea.PLAYER1_STOCK_3);
+		drawPict(c, getPawnDrawId(engine.getStock(0)[3]), TouchArea.PLAYER1_STOCK_4);
+		
 		// player 2
-		drawSpawn(c, engine.getStock(1)[0], UIArea.AREA_PLAYER2_STOCK_1);
-		drawSpawn(c, engine.getStock(1)[1], UIArea.AREA_PLAYER2_STOCK_2);
-		drawSpawn(c, engine.getStock(1)[2], UIArea.AREA_PLAYER2_STOCK_3);
-		drawSpawn(c, engine.getStock(1)[3], UIArea.AREA_PLAYER2_STOCK_4);
-	}
-
-	private void drawSpawn(Canvas c, Item i, Rect r) {
-		switch (i) {
-		case WHITE_SPAWN:
-			c.drawBitmap(lib.get(R.drawable.spawn_white), new Rect(0, 0, SPAWN_SIZE, SPAWN_SIZE), r, paint);
-			break;
-		case BLACK_SPAWN:
-			c.drawBitmap(lib.get(R.drawable.spawn_black), new Rect(0, 0, SPAWN_SIZE, SPAWN_SIZE), r, paint);
-			break;
-		default:
-			break;
-		}
+		drawPict(c, getPawnDrawId(engine.getStock(1)[0]), TouchArea.PLAYER2_STOCK_1);
+		drawPict(c, getPawnDrawId(engine.getStock(1)[1]), TouchArea.PLAYER2_STOCK_2);
+		drawPict(c, getPawnDrawId(engine.getStock(1)[2]), TouchArea.PLAYER2_STOCK_3);
+		drawPict(c, getPawnDrawId(engine.getStock(1)[3]), TouchArea.PLAYER2_STOCK_4);
 	}
 
 	private void drawPict(Canvas c, int id, Point p) {

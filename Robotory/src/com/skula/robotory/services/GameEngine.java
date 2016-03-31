@@ -3,7 +3,7 @@ package com.skula.robotory.services;
 import java.nio.ByteOrder;
 
 import com.skula.robotory.constants.Cnst;
-import com.skula.robotory.constants.UIArea;
+import com.skula.robotory.constants.TouchArea;
 import com.skula.robotory.enums.Action;
 import com.skula.robotory.enums.Item;
 import com.skula.robotory.models.Matrix;
@@ -53,8 +53,8 @@ public class GameEngine {
 		}
 
 		this.action = Action.NONE;
-		this.srcArea = UIArea.AREA_NONE_ID;
-		this.destArea = UIArea.AREA_NONE_ID;
+		this.srcArea = TouchArea.NONE_ID;
+		this.destArea = TouchArea.NONE_ID;
 
 		this.endRound = false;
 
@@ -70,7 +70,7 @@ public class GameEngine {
 	public boolean canProcess() {
 		switch (action) {
 		case MOVE_ROBOT:
-			if (!UIArea.isTile(destArea)) {
+			if (!TouchArea.isTile(destArea)) {
 				return false;
 			}
 			// si on deselectionne le robot
@@ -83,7 +83,7 @@ public class GameEngine {
 				return false;
 			}
 		case PUT_SPAWN:
-			if (!UIArea.isTile(destArea)) {
+			if (!TouchArea.isTile(destArea)) {
 				return false;
 			}
 			if (board[destArea].equals(Item.NONE)) {
@@ -92,22 +92,22 @@ public class GameEngine {
 				return false;
 			}
 		case PICK_SPAWN:
-			if (UIArea.isStockBtn(srcArea, token)) {
+			if (TouchArea.isStockBtn(srcArea, token)) {
 				if (isStockFull(token)) {
 					return false;
 				}
 				int tmp = 0;
 				switch (srcArea) {
-				case UIArea.AREA_PLAYER1_BUTTON_STOCK_WHITE_ID:
+				case TouchArea.PLAYER1_STOCK_WHITE_ID:
 					tmp = wSpawnleft;
 					break;
-				case UIArea.AREA_PLAYER1_BUTTON_STOCK_BLACK_ID:
+				case TouchArea.PLAYER1_STOCK_BLACK_ID:
 					tmp = bSpawnleft;
 					break;
-				case UIArea.AREA_PLAYER2_BUTTON_STOCK_WHITE_ID:
+				case TouchArea.PLAYER2_STOCK_WHITE_ID:
 					tmp = wSpawnleft;
 					break;
-				case UIArea.AREA_PLAYER2_BUTTON_STOCK_BLACK_ID:
+				case TouchArea.PLAYER2_STOCK_BLACK_ID:
 					tmp = bSpawnleft;
 					break;
 				}
@@ -121,42 +121,42 @@ public class GameEngine {
 			}
 		case NONE:
 			// Clique sur une zone vide
-			if (srcArea == UIArea.AREA_NONE_ID) {
+			if (srcArea == TouchArea.NONE_ID) {
 				return false;
 			}
 			// Clique sur une tuile
-			if (UIArea.isTile(srcArea)) {
+			if (TouchArea.isTile(srcArea)) {
 				if (isRobot(srcArea) && canMoveRobot(srcArea)) {
 					return true;
 				} else {
 					return false;
 				}
 				// Clique sur un pion d'energie du stock d'un joueur
-			} else if (UIArea.isPlayerStock(srcArea, token)) {
+			} else if (TouchArea.isPlayerStock(srcArea, token)) {
 				Item sc = null;
 				switch (srcArea) {
-				case UIArea.AREA_PLAYER1_STOCK_1_ID:
+				case TouchArea.PLAYER1_STOCK_1_ID:
 					sc = p1Stock[0];
 					break;
-				case UIArea.AREA_PLAYER1_STOCK_2_ID:
+				case TouchArea.PLAYER1_STOCK_2_ID:
 					sc = p1Stock[1];
 					break;
-				case UIArea.AREA_PLAYER1_STOCK_3_ID:
+				case TouchArea.PLAYER1_STOCK_3_ID:
 					sc = p1Stock[2];
 					break;
-				case UIArea.AREA_PLAYER1_STOCK_4_ID:
+				case TouchArea.PLAYER1_STOCK_4_ID:
 					sc = p1Stock[3];
 					break;
-				case UIArea.AREA_PLAYER2_STOCK_1_ID:
+				case TouchArea.PLAYER2_STOCK_1_ID:
 					sc = p2Stock[0];
 					break;
-				case UIArea.AREA_PLAYER2_STOCK_2_ID:
+				case TouchArea.PLAYER2_STOCK_2_ID:
 					sc = p2Stock[1];
 					break;
-				case UIArea.AREA_PLAYER2_STOCK_3_ID:
+				case TouchArea.PLAYER2_STOCK_3_ID:
 					sc = p2Stock[2];
 					break;
-				case UIArea.AREA_PLAYER2_STOCK_4_ID:
+				case TouchArea.PLAYER2_STOCK_4_ID:
 					sc = p2Stock[3];
 					break;
 				default:
@@ -168,22 +168,22 @@ public class GameEngine {
 					return true;
 				}
 				// Clique sur les boutons pour remplir le stock
-			} else if (UIArea.isStockBtn(srcArea, token)) {
+			} else if (TouchArea.isStockBtn(srcArea, token)) {
 				if (isStockFull(token)) {
 					return false;
 				}
 				int tmp = 0;
 				switch (srcArea) {
-				case UIArea.AREA_PLAYER1_BUTTON_STOCK_WHITE_ID:
+				case TouchArea.PLAYER1_STOCK_WHITE_ID:
 					tmp = wSpawnleft;
 					break;
-				case UIArea.AREA_PLAYER1_BUTTON_STOCK_BLACK_ID:
+				case TouchArea.PLAYER1_STOCK_BLACK_ID:
 					tmp = bSpawnleft;
 					break;
-				case UIArea.AREA_PLAYER2_BUTTON_STOCK_WHITE_ID:
+				case TouchArea.PLAYER2_STOCK_WHITE_ID:
 					tmp = wSpawnleft;
 					break;
-				case UIArea.AREA_PLAYER2_BUTTON_STOCK_BLACK_ID:
+				case TouchArea.PLAYER2_STOCK_BLACK_ID:
 					tmp = bSpawnleft;
 					break;
 				}
@@ -212,7 +212,7 @@ public class GameEngine {
 			} else {
 				moveRobot(srcArea, destArea);
 				srcArea = destArea;
-				destArea = UIArea.AREA_NONE_ID;
+				destArea = TouchArea.NONE_ID;
 				if (!canMoveRobot(srcArea)) { // A CREER LA FONCTION
 												// canMoveRobot(int tileId)
 					endRound = true;
@@ -225,20 +225,20 @@ public class GameEngine {
 			break;
 		case PICK_SPAWN:
 			if (token == 0) {
-				if (srcArea == UIArea.AREA_PLAYER1_BUTTON_STOCK_WHITE_ID) {
+				if (srcArea == TouchArea.PLAYER1_STOCK_WHITE_ID) {
 					addStock(0, Item.WHITE_SPAWN);
-					srcArea = UIArea.AREA_NONE_ID;
+					srcArea = TouchArea.NONE_ID;
 				} else {
 					addStock(0, Item.BLACK_SPAWN);
-					srcArea = UIArea.AREA_NONE_ID;
+					srcArea = TouchArea.NONE_ID;
 				}
 			} else {
-				if (srcArea == UIArea.AREA_PLAYER2_BUTTON_STOCK_WHITE_ID) {
+				if (srcArea == TouchArea.PLAYER2_STOCK_WHITE_ID) {
 					addStock(1, Item.WHITE_SPAWN);
-					srcArea = UIArea.AREA_NONE_ID;
+					srcArea = TouchArea.NONE_ID;
 				} else {
 					addStock(1, Item.BLACK_SPAWN);
-					srcArea = UIArea.AREA_NONE_ID;
+					srcArea = TouchArea.NONE_ID;
 				}
 			}
 
@@ -246,27 +246,27 @@ public class GameEngine {
 				endRound = true;
 			}
 
-			srcArea = UIArea.AREA_NONE_ID;
-			destArea = UIArea.AREA_NONE_ID;
+			srcArea = TouchArea.NONE_ID;
+			destArea = TouchArea.NONE_ID;
 			break;
 		case NONE:
-			if (UIArea.isTile(srcArea)) {
+			if (TouchArea.isTile(srcArea)) {
 				action = Action.MOVE_ROBOT;
-			} else if (UIArea.isPlayerStock(srcArea, token)) {
-				if (destArea == UIArea.AREA_NONE_ID) {
+			} else if (TouchArea.isPlayerStock(srcArea, token)) {
+				if (destArea == TouchArea.NONE_ID) {
 					action = Action.PUT_SPAWN;
 				} else {
 					endRound = true;
 				}
-			} else if (UIArea.isStockBtn(srcArea, token)) {
+			} else if (TouchArea.isStockBtn(srcArea, token)) {
 				if (token == 0) {
-					if (srcArea == UIArea.AREA_PLAYER1_BUTTON_STOCK_WHITE_ID) {
+					if (srcArea == TouchArea.PLAYER1_STOCK_WHITE_ID) {
 						addStock(0, Item.WHITE_SPAWN);
 					} else {
 						addStock(0, Item.BLACK_SPAWN);
 					}
 				} else {
-					if (srcArea == UIArea.AREA_PLAYER2_BUTTON_STOCK_WHITE_ID) {
+					if (srcArea == TouchArea.PLAYER2_STOCK_WHITE_ID) {
 						addStock(1, Item.WHITE_SPAWN);
 					} else {
 						addStock(1, Item.BLACK_SPAWN);
@@ -287,35 +287,35 @@ public class GameEngine {
 
 	private void putSpawn(int src, int dest) {
 		switch (src) {
-		case UIArea.AREA_PLAYER1_STOCK_1_ID:
+		case TouchArea.PLAYER1_STOCK_1_ID:
 			board[dest] = p1Stock[0];
 			p1Stock[0] = Item.NONE;
 			break;
-		case UIArea.AREA_PLAYER1_STOCK_2_ID:
+		case TouchArea.PLAYER1_STOCK_2_ID:
 			board[dest] = p1Stock[1];
 			p1Stock[1] = Item.NONE;
 			break;
-		case UIArea.AREA_PLAYER1_STOCK_3_ID:
+		case TouchArea.PLAYER1_STOCK_3_ID:
 			board[dest] = p1Stock[2];
 			p1Stock[2] = Item.NONE;
 			break;
-		case UIArea.AREA_PLAYER1_STOCK_4_ID:
+		case TouchArea.PLAYER1_STOCK_4_ID:
 			board[dest] = p1Stock[3];
 			p1Stock[3] = Item.NONE;
 			break;
-		case UIArea.AREA_PLAYER2_STOCK_1_ID:
+		case TouchArea.PLAYER2_STOCK_1_ID:
 			board[dest] = p2Stock[0];
 			p2Stock[0] = Item.NONE;
 			break;
-		case UIArea.AREA_PLAYER2_STOCK_2_ID:
+		case TouchArea.PLAYER2_STOCK_2_ID:
 			board[dest] = p2Stock[1];
 			p2Stock[1] = Item.NONE;
 			break;
-		case UIArea.AREA_PLAYER2_STOCK_3_ID:
+		case TouchArea.PLAYER2_STOCK_3_ID:
 			board[dest] = p2Stock[2];
 			p2Stock[2] = Item.NONE;
 			break;
-		case UIArea.AREA_PLAYER2_STOCK_4_ID:
+		case TouchArea.PLAYER2_STOCK_4_ID:
 			board[dest] = p2Stock[3];
 			p2Stock[3] = Item.NONE;
 			break;
