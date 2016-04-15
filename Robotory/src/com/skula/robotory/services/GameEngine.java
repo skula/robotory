@@ -30,17 +30,17 @@ public class GameEngine {
 		for (int i = 0; i < Cnst.TILES_COUNT; i++) {
 			this.board[i] = Item.NONE;
 		}
+
+		// bouchon
 		this.board[10] = Item.RED_ROBOT;
 		this.board[13] = Item.WHITE_ROBOT;
 		this.board[14] = Item.BLACK_ROBOT;
-
-		// bouchon
-		/*this.board[1] = Item.BLACK_SPAWN;
+		this.board[1] = Item.BLACK_SPAWN;
 		this.board[2] = Item.WHITE_SPAWN;
 		this.board[3] = Item.BLACK_SPAWN;
 		this.board[4] = Item.WHITE_SPAWN;
 		this.board[5] = Item.BLACK_SPAWN;
-		this.board[23] = Item.WHITE_SPAWN;*/
+		this.board[23] = Item.WHITE_SPAWN;
 
 		this.wSpawnleft = Cnst.SPAWNS_COUNT;
 		this.bSpawnleft = Cnst.SPAWNS_COUNT;
@@ -48,8 +48,8 @@ public class GameEngine {
 		this.p1Stock = new Item[Cnst.STOCK_SLOTS_COUNT];
 		this.p2Stock = new Item[Cnst.STOCK_SLOTS_COUNT];
 		for (int i = 0; i < Cnst.STOCK_SLOTS_COUNT; i++) {
-			p1Stock[i] = Item.NONE;
-			p2Stock[i] = Item.NONE;
+			p1Stock[i] = Item.BLACK_SPAWN;
+			p2Stock[i] = Item.BLACK_SPAWN;
 		}
 
 		this.action = Action.NONE;

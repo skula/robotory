@@ -41,9 +41,9 @@ public class Drawer {
 
 	public void draw(Canvas c) {
 		drawBackground(c);
-		//drawBoard(c);
+		drawBoard(c);
 		drawStockButtons(c);
-		// drawPlayersStock(c);
+		drawPlayersStock(c);
 		drawTouchArea(c);
 	}
 
@@ -122,7 +122,7 @@ public class Drawer {
 		c.drawRect(TouchArea.PLAYER2_STOCK_3, paint);
 		c.drawRect(TouchArea.PLAYER2_STOCK_4, paint);
 
-		paint.setColor(Color.YELLOW);
+		paint.setColor(Color.BLUE);
 		c.drawRect(TouchArea.PLAYER1_STOCK_BLACK, paint);
 		c.drawRect(TouchArea.PLAYER1_STOCK_WHITE, paint);
 		c.drawRect(TouchArea.PLAYER2_STOCK_BLACK, paint);
@@ -130,8 +130,6 @@ public class Drawer {
 	}
 
 	private void drawBackground(Canvas c) {
-		// c.drawBitmap(lib.get(R.drawable.background), new Rect(0, 0, 800,
-		// 1280), new Rect(0, 0, 800, 1200), paint);
 		drawPict(c, R.drawable.background, DrawAreas.BOARD);
 	}
 
@@ -151,37 +149,41 @@ public class Drawer {
 				drawPict(c, R.drawable.robot_red, getRobotSpot(r, R.drawable.robot_red));
 				break;
 			default:
-				rr = new Rect(r.left + 24, r.top + 31, r.left + 24 + SPAWN_SIZE, r.top + 31 + SPAWN_SIZE);
+				rr = new Rect(r.left + 35, r.top + 35, r.left + 35 + SPAWN_SIZE, r.top + 35 + SPAWN_SIZE);
 				drawPict(c, getPawnDrawId(engine.getBoard()[i]), rr);
 			}
 		}
 	}
 
 	private Rect getRobotSpot(Rect r, int dId) {
-		return new Rect(r.left - 10, r.top - 4, r.left - 10 + lib.get(dId).getWidth(), r.top - 4
-				+ lib.get(dId).getHeight());
+		return new Rect(r.left - 25, r.top - 25, r.left - 25 + lib.get(dId).getWidth(), r.top
+				+ lib.get(dId).getHeight() - 25);
 	}
 
-	private int getPawnDrawId(Item i){
-		if(i == Item.WHITE_SPAWN){
+	private int getPawnDrawId(Item i) {
+		if (i == Item.WHITE_SPAWN) {
 			return R.drawable.spawn_white;
-		}else{
+		} else {
 			return R.drawable.spawn_black;
 		}
 	}
-	
+
 	private void drawPlayersStock(Canvas c) {
 		// player 1
-		drawPict(c, getPawnDrawId(engine.getStock(0)[0]), TouchArea.PLAYER1_STOCK_1);
-		drawPict(c, getPawnDrawId(engine.getStock(0)[1]), TouchArea.PLAYER1_STOCK_2);
-		drawPict(c, getPawnDrawId(engine.getStock(0)[2]), TouchArea.PLAYER1_STOCK_3);
-		drawPict(c, getPawnDrawId(engine.getStock(0)[3]), TouchArea.PLAYER1_STOCK_4);
-		
+		drawPict(c, getPawnDrawId(engine.getStock(0)[0]), getStockPawnRect(TouchArea.PLAYER1_STOCK_1));
+		drawPict(c, getPawnDrawId(engine.getStock(0)[1]), getStockPawnRect(TouchArea.PLAYER1_STOCK_2));
+		drawPict(c, getPawnDrawId(engine.getStock(0)[2]), getStockPawnRect(TouchArea.PLAYER1_STOCK_3));
+		drawPict(c, getPawnDrawId(engine.getStock(0)[3]), getStockPawnRect(TouchArea.PLAYER1_STOCK_4));
+
 		// player 2
-		drawPict(c, getPawnDrawId(engine.getStock(1)[0]), TouchArea.PLAYER2_STOCK_1);
-		drawPict(c, getPawnDrawId(engine.getStock(1)[1]), TouchArea.PLAYER2_STOCK_2);
-		drawPict(c, getPawnDrawId(engine.getStock(1)[2]), TouchArea.PLAYER2_STOCK_3);
-		drawPict(c, getPawnDrawId(engine.getStock(1)[3]), TouchArea.PLAYER2_STOCK_4);
+		drawPict(c, getPawnDrawId(engine.getStock(1)[0]), getStockPawnRect(TouchArea.PLAYER2_STOCK_1));
+		drawPict(c, getPawnDrawId(engine.getStock(1)[1]), getStockPawnRect(TouchArea.PLAYER2_STOCK_2));
+		drawPict(c, getPawnDrawId(engine.getStock(1)[2]), getStockPawnRect(TouchArea.PLAYER2_STOCK_3));
+		drawPict(c, getPawnDrawId(engine.getStock(1)[3]), getStockPawnRect(TouchArea.PLAYER2_STOCK_4));
+	}
+
+	private Rect getStockPawnRect(Rect r) {
+		return new Rect(r.left + 10, r.top + 10, r.left + SPAWN_SIZE + 10, r.top + SPAWN_SIZE + 10);
 	}
 
 	private void drawPict(Canvas c, int id, Point p) {

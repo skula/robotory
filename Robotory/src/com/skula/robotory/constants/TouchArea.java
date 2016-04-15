@@ -79,38 +79,37 @@ public class TouchArea {
 
 	public static final int BUTTON_STOCK_DX = 60;
 	public static final Rect AREA_PLAYER1_STOCK_BLACK = new Rect(982, 233, 982 + STOCK_SIZE, 233 + STOCK_SIZE);
-	public static final Rect AREA_PLAYER1_STOCK_WHITE = new Rect(AREA_PLAYER1_STOCK_BLACK.left
-			- BUTTON_STOCK_DX - STOCK_SIZE, AREA_PLAYER1_STOCK_BLACK.top, AREA_PLAYER1_STOCK_BLACK.right
-			- BUTTON_STOCK_DX - STOCK_SIZE, AREA_PLAYER1_STOCK_BLACK.bottom);
+	public static final Rect AREA_PLAYER1_STOCK_WHITE = new Rect(AREA_PLAYER1_STOCK_BLACK.left - BUTTON_STOCK_DX
+			- STOCK_SIZE, AREA_PLAYER1_STOCK_BLACK.top, AREA_PLAYER1_STOCK_BLACK.right - BUTTON_STOCK_DX - STOCK_SIZE,
+			AREA_PLAYER1_STOCK_BLACK.bottom);
 
 	public static final Rect AREA_PLAYER2_STOCK_BLACK = new Rect(135, 1515, 135 + STOCK_SIZE, 1515 + STOCK_SIZE);
-	public static final Rect AREA_PLAYER2_STOCK_WHITE = new Rect(AREA_PLAYER2_STOCK_BLACK.left
-			+ BUTTON_STOCK_DX + STOCK_SIZE, AREA_PLAYER2_STOCK_BLACK.top, AREA_PLAYER2_STOCK_BLACK.right
-			+ BUTTON_STOCK_DX + STOCK_SIZE, AREA_PLAYER2_STOCK_BLACK.bottom);
-	
+	public static final Rect AREA_PLAYER2_STOCK_WHITE = new Rect(AREA_PLAYER2_STOCK_BLACK.left + BUTTON_STOCK_DX
+			+ STOCK_SIZE, AREA_PLAYER2_STOCK_BLACK.top, AREA_PLAYER2_STOCK_BLACK.right + BUTTON_STOCK_DX + STOCK_SIZE,
+			AREA_PLAYER2_STOCK_BLACK.bottom);
+
 	public static final int PLAYER2_OK_ID = 210;
 	public static final Rect PLAYER2_OK = new Rect(0, 0, 100, 100);
 
 	public static final int PLAYER1_OK_ID = 200;
 	public static final Rect PLAYER1_OK = new Rect(0, 0, 100, 100);
-	
 
 	public static final int PLAYER2_STOCK_WHITE_ID = 211;
-	public static final Rect PLAYER2_STOCK_WHITE = new Rect(160, 1038, 160 , // 40,138
-			1038 );
+	public static final Rect PLAYER2_STOCK_WHITE = new Rect(DrawAreas.P2_WHITE_PAWN.getX() -10,
+			DrawAreas.P2_WHITE_PAWN.getY()- 78, DrawAreas.P2_WHITE_PAWN.getX() + 100, DrawAreas.P2_WHITE_PAWN.getY() +23);
 	public static final int PLAYER2_STOCK_BLACK_ID = 212;
-	public static final Rect PLAYER2_STOCK_BLACK = new Rect(40, 1038, 40 , // 40,138
-			1038 );
-	
+	public static final Rect PLAYER2_STOCK_BLACK = new Rect(DrawAreas.P2_BLACK_PAWN.getX() -12,
+			DrawAreas.P2_BLACK_PAWN.getY()- 78, DrawAreas.P2_BLACK_PAWN.getX() + 98, DrawAreas.P2_BLACK_PAWN.getY() +23);
+
 	public static final int PLAYER1_STOCK_WHITE_ID = 201;
-	public static final Rect PLAYER1_STOCK_WHITE = new Rect(555, 80, 555,
-			80);
+	public static final Rect PLAYER1_STOCK_WHITE = new Rect(DrawAreas.P1_WHITE_PAWN.getX() -12,
+			DrawAreas.P1_WHITE_PAWN.getY()- 78, DrawAreas.P1_WHITE_PAWN.getX() + 98, DrawAreas.P1_WHITE_PAWN.getY() +23);
 	public static final int PLAYER1_STOCK_BLACK_ID = 202;
-	public static final Rect PLAYER1_STOCK_BLACK = new Rect(675, 80, 675,
-			80);
-	
+	public static final Rect PLAYER1_STOCK_BLACK = new Rect(DrawAreas.P1_BLACK_PAWN.getX() -12,
+			DrawAreas.P1_BLACK_PAWN.getY()- 78, DrawAreas.P1_BLACK_PAWN.getX() + 98, DrawAreas.P1_BLACK_PAWN.getY() +23);
+
 	public static final int NONE_ID = -1;
-	
+
 	public static final int TILE_1_ID = 0;
 	public static final int TILE_2_ID = 1;
 	public static final int TILE_3_ID = 2;
@@ -135,7 +134,7 @@ public class TouchArea {
 	public static final int TILE_22_ID = 21;
 	public static final int TILE_23_ID = 22;
 	public static final int TILE_24_ID = 23;
-	
+
 	public static final int PLAYER1_STOCK_1_ID = 24;
 	public static final int PLAYER1_STOCK_2_ID = 25;
 	public static final int PLAYER1_STOCK_3_ID = 26;
@@ -144,13 +143,12 @@ public class TouchArea {
 	public static final int PLAYER2_STOCK_2_ID = 29;
 	public static final int PLAYER2_STOCK_3_ID = 30;
 	public static final int PLAYER2_STOCK_4_ID = 31;
-	
+
 	public static final int AREA_PLAYER1_STOCK_BLACK_ID = 32;
 	public static final int AREA_PLAYER1_STOCK_WHITE_ID = 33;
 	public static final int AREA_PLAYER2_STOCK_BLACK_ID = 34;
 	public static final int AREA_PLAYER2_STOCK_WHITE_ID = 35;
-	
-	
+
 	public static boolean isTile(int i) {
 		return i >= TILE_1_ID && i <= TILE_24_ID;
 	}
@@ -172,7 +170,7 @@ public class TouchArea {
 					|| i == PLAYER2_STOCK_4_ID;
 		}
 	}
-	
+
 	public static int getArea(int x, int y) {
 		// TILE_1
 		if (TILE_1.contains(x, y)) {
@@ -369,7 +367,7 @@ public class TouchArea {
 
 		return NONE_ID;
 	}
-	
+
 	public static Rect getArea(int id) {
 		switch (id) {
 		case TILE_1_ID:
