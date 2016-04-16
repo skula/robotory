@@ -102,11 +102,11 @@ public class TouchArea {
 			DrawAreas.P2_BLACK_PAWN.getY()- 78, DrawAreas.P2_BLACK_PAWN.getX() + 98, DrawAreas.P2_BLACK_PAWN.getY() +23);
 
 	public static final int PLAYER1_STOCK_WHITE_ID = 201;
-	public static final Rect PLAYER1_STOCK_WHITE = new Rect(DrawAreas.P1_WHITE_PAWN.getX() -12,
-			DrawAreas.P1_WHITE_PAWN.getY()- 78, DrawAreas.P1_WHITE_PAWN.getX() + 98, DrawAreas.P1_WHITE_PAWN.getY() +23);
+	public static final Rect PLAYER1_STOCK_WHITE = new Rect(DrawAreas.P1_WHITE_PAWN.getX() -100,
+			DrawAreas.P1_WHITE_PAWN.getY()- 28, DrawAreas.P1_WHITE_PAWN.getX() + 10, DrawAreas.P1_WHITE_PAWN.getY() +73);
 	public static final int PLAYER1_STOCK_BLACK_ID = 202;
-	public static final Rect PLAYER1_STOCK_BLACK = new Rect(DrawAreas.P1_BLACK_PAWN.getX() -12,
-			DrawAreas.P1_BLACK_PAWN.getY()- 78, DrawAreas.P1_BLACK_PAWN.getX() + 98, DrawAreas.P1_BLACK_PAWN.getY() +23);
+	public static final Rect PLAYER1_STOCK_BLACK = new Rect(DrawAreas.P1_BLACK_PAWN.getX() -100,
+			DrawAreas.P1_BLACK_PAWN.getY()- 28, DrawAreas.P1_BLACK_PAWN.getX() + 10, DrawAreas.P1_BLACK_PAWN.getY() +73);
 
 	public static final int NONE_ID = -1;
 
