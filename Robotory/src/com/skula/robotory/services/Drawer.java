@@ -219,7 +219,7 @@ public class Drawer {
 	private void drawStockPawn(Canvas c, Item i, Rect r) {
 		if (i != Item.NONE) {
 			Rect tmp = new Rect(r.left + 10, r.top + 10, r.left + SPAWN_SIZE + 10, r.top + SPAWN_SIZE + 10);
-			drawPict(c, getPawnDrawId(engine.getStock(0)[1]), tmp);
+			drawPict(c, getPawnDrawId(i), tmp);
 		}
 	}
 
