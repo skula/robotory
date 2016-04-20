@@ -28,6 +28,9 @@ public class PictureLibrary {
 		this.map.put(R.drawable.p1_victory, BitmapFactory.decodeResource(res, R.drawable.p1_victory));
 		this.map.put(R.drawable.p2_victory, BitmapFactory.decodeResource(res, R.drawable.p2_victory));
 		this.map.put(R.drawable.background_endgame, BitmapFactory.decodeResource(res, R.drawable.background_endgame));
+		
+		this.map.put(R.drawable.sel_pawn, BitmapFactory.decodeResource(res, R.drawable.sel_pawn));
+		this.map.put(R.drawable.sel_robot, BitmapFactory.decodeResource(res, R.drawable.sel_robot));
 	}
 
 	public Bitmap get(int id) {

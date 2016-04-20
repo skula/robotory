@@ -55,7 +55,7 @@ public class GameEngine {
 		this.message = "";
 		
 		// bouchon
-		if(false){
+		if(true){
 			this.board[1] = Item.BLACK_SPAWN;
 			this.board[2] = Item.WHITE_SPAWN;
 			this.board[3] = Item.BLACK_SPAWN;

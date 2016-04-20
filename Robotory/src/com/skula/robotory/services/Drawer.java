@@ -15,6 +15,7 @@ import com.skula.robotory.constants.Cnst;
 import com.skula.robotory.constants.DrawAreas;
 import com.skula.robotory.constants.PictureLibrary;
 import com.skula.robotory.constants.TouchArea;
+import com.skula.robotory.enums.Action;
 import com.skula.robotory.enums.Item;
 import com.skula.robotory.models.Point;
 
@@ -173,12 +174,30 @@ public class Drawer {
 			Rect rr = null;
 			switch (engine.getBoard()[i]) {
 			case WHITE_ROBOT:
+				if(engine.getAction().equals(Action.MOVE_ROBOT)){
+					if(engine.getBoard()[engine.getSrcArea()] == Item.WHITE_ROBOT){
+						Point p = new Point(r.left -30, r.top -12);
+						drawPict(c, R.drawable.sel_robot, p);
+					}
+				}
 				drawPict(c, R.drawable.robot_white, getRobotSpot(r, R.drawable.robot_white));
 				break;
 			case BLACK_ROBOT:
+				if(engine.getAction().equals(Action.MOVE_ROBOT)){
+					if(engine.getBoard()[engine.getSrcArea()] == Item.BLACK_ROBOT){
+						Point p = new Point(r.left -30, r.top -12);
+						drawPict(c, R.drawable.sel_robot, p);
+					}
+				}
 				drawPict(c, R.drawable.robot_black, getRobotSpot(r, R.drawable.robot_black));
 				break;
 			case RED_ROBOT:
+				if(engine.getAction().equals(Action.MOVE_ROBOT)){
+					if(engine.getBoard()[engine.getSrcArea()] == Item.RED_ROBOT){
+						Point p = new Point(r.left -30, r.top -12);
+						drawPict(c, R.drawable.sel_robot, p);
+					}
+				}
 				drawPict(c, R.drawable.robot_red, getRobotSpot(r, R.drawable.robot_red));
 				break;
 			case NONE:
@@ -205,17 +224,32 @@ public class Drawer {
 
 	private void drawPlayersStock(Canvas c) {
 		// player 1
+		drawPlayersStockSel(c, TouchArea.PLAYER1_STOCK_1, TouchArea.PLAYER1_STOCK_1_ID);
 		drawStockPawn(c, engine.getStock(0)[0], TouchArea.PLAYER1_STOCK_1);
+		drawPlayersStockSel(c, TouchArea.PLAYER1_STOCK_2, TouchArea.PLAYER1_STOCK_2_ID);
 		drawStockPawn(c, engine.getStock(0)[1], TouchArea.PLAYER1_STOCK_2);
+		drawPlayersStockSel(c, TouchArea.PLAYER1_STOCK_3, TouchArea.PLAYER1_STOCK_3_ID);
 		drawStockPawn(c, engine.getStock(0)[2], TouchArea.PLAYER1_STOCK_3);
+		drawPlayersStockSel(c, TouchArea.PLAYER1_STOCK_4, TouchArea.PLAYER1_STOCK_4_ID);
 		drawStockPawn(c, engine.getStock(0)[3], TouchArea.PLAYER1_STOCK_4);
 		// player 2
+		drawPlayersStockSel(c, TouchArea.PLAYER2_STOCK_1, TouchArea.PLAYER2_STOCK_1_ID);
 		drawStockPawn(c, engine.getStock(1)[0], TouchArea.PLAYER2_STOCK_1);
+		drawPlayersStockSel(c, TouchArea.PLAYER2_STOCK_2, TouchArea.PLAYER2_STOCK_2_ID);
 		drawStockPawn(c, engine.getStock(1)[1], TouchArea.PLAYER2_STOCK_2);
+		drawPlayersStockSel(c, TouchArea.PLAYER2_STOCK_3, TouchArea.PLAYER2_STOCK_3_ID);
 		drawStockPawn(c, engine.getStock(1)[2], TouchArea.PLAYER2_STOCK_3);
+		drawPlayersStockSel(c, TouchArea.PLAYER2_STOCK_4, TouchArea.PLAYER2_STOCK_4_ID);
 		drawStockPawn(c, engine.getStock(1)[3], TouchArea.PLAYER2_STOCK_4);
 	}
 
+	private void drawPlayersStockSel(Canvas c, Rect r, int id) {
+		if(engine.getAction()==Action.PUT_SPAWN && engine.getSrcArea() == id){
+			Point p = new Point(r.left - 18, r.top -17);
+			drawPict(c, R.drawable.sel_pawn, p);
+		}
+	}
+	
 	private void drawStockPawn(Canvas c, Item i, Rect r) {
 		if (i != Item.NONE) {
 			Rect tmp = new Rect(r.left + 10, r.top + 10, r.left + SPAWN_SIZE + 10, r.top + SPAWN_SIZE + 10);
