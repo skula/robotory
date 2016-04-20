@@ -35,7 +35,6 @@ public class GameEngine {
 		this.board[13] = Item.WHITE_ROBOT;
 		this.board[14] = Item.BLACK_ROBOT;
 	
-
 		this.wSpawnleft = Cnst.SPAWNS_COUNT;
 		this.bSpawnleft = Cnst.SPAWNS_COUNT;
 		
@@ -55,7 +54,14 @@ public class GameEngine {
 		this.message = "";
 		
 		// bouchon
-		if(true){
+		if(false){
+			this.wSpawnleft = 1;
+			this.bSpawnleft = 0;
+			
+			this.board[0] = Item.RED_ROBOT;
+			this.board[21] = Item.WHITE_ROBOT;
+			this.board[20] = Item.BLACK_ROBOT;
+		
 			this.board[1] = Item.BLACK_SPAWN;
 			this.board[2] = Item.WHITE_SPAWN;
 			this.board[3] = Item.BLACK_SPAWN;

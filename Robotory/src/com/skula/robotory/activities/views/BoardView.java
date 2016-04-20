@@ -12,8 +12,6 @@ import com.skula.robotory.enums.Action;
 import com.skula.robotory.services.Drawer;
 import com.skula.robotory.services.GameEngine;
 
-// TODO:
-// - tester chaque action pour chaque joueur
 public class BoardView extends View {
 	private Paint paint;
 	private Resources res;

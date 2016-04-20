@@ -107,14 +107,32 @@ public class Drawer {
 	}
 
 	public void drawEndGame(Canvas c) {
-		c.drawBitmap(lib.get(R.drawable.background_endgame), new Rect(0, 0, 800, 1280), new Rect(0, 0, 800, 1200),
-				paint);
+		drawPict(c, R.drawable.background_endgame, DrawAreas.BOARD);
+		Typeface plain = Typeface.createFromAsset(assetManager, "fonts/OCRASTD.OTF");
+		paint.setTypeface(plain);
+		paint.setTextSize(100f);
+		Point p = new Point(900,650);
+		
+		int cx = measuredWidth / 2;
+		int cy = measuredHeight / 2;
+		c.save();
+		c.rotate(180, p.getX(), p.getY());
 		if (engine.getWinner() == 0) {
-			c.drawBitmap(lib.get(R.drawable.p1_victory), new Rect(0, 0, 800, 600), new Rect(0, 0, 800, 600), paint);
-			c.drawBitmap(lib.get(R.drawable.p2_defeat), new Rect(0, 0, 800, 600), new Rect(0, 600, 800, 1200), paint);
-		} else {
-			c.drawBitmap(lib.get(R.drawable.p1_defeat), new Rect(0, 0, 800, 600), new Rect(0, 0, 800, 600), paint);
-			c.drawBitmap(lib.get(R.drawable.p2_victory), new Rect(0, 0, 800, 600), new Rect(0, 600, 800, 1200), paint);
+			paint.setColor(Color.GREEN);
+			c.drawText("Victoire", cx + p.getX(), cy + p.getY(), paint);
+		}else{
+			paint.setColor(Color.RED);
+			c.drawText("Défaite", p.getX(), p.getY(), paint);
+		}
+		
+		c.restore();
+		p = new Point(350,1200);
+		if (engine.getWinner() == 0) {
+			paint.setColor(Color.RED);
+			c.drawText("Défaite", cx + p.getX(), cy + p.getY(), paint);
+		}else{
+			paint.setColor(Color.GREEN);
+			c.drawText("Victoire", p.getX(), p.getY(), paint);
 		}
 	}
 
